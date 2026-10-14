@@ -1,0 +1,26 @@
+issue_id,week,owner,reviewer,task,dependency,acceptance_evidence
+W1-S1,1,S1,S5,"Verify WRDS entitlement, schema and total-return definition",Kickoff,Unique date/asset keys; decimal returns; approved training/validation/test dates.
+W1-S2,1,S2,S1,Normalize canonical monthly returns and check missingness,Kickoff,Unique date/asset keys; decimal returns; approved training/validation/test dates.
+W1-S3,1,S3,S2,Freeze universe/date split and survivorship assumptions,Kickoff,Unique date/asset keys; decimal returns; approved training/validation/test dates.
+W1-S4,1,S4,S3,Sketch expected-versus-realized dashboard views,Kickoff,Unique date/asset keys; decimal returns; approved training/validation/test dates.
+W1-S5,1,S5,S4,Run demo and audit credential/data handling,Kickoff,Unique date/asset keys; decimal returns; approved training/validation/test dates.
+W2-S1,2,S1,S5,"Resolve identifiers, missing dates and delisting treatment",Week 1 gate,Hand calculation matches Python; covariance is symmetric; no filling missing returns with zero.
+W2-S2,2,S2,S1,"Hand-check covariance, volatility and drawdown",Week 1 gate,Hand calculation matches Python; covariance is symmetric; no filling missing returns with zero.
+W2-S3,2,S3,S2,Analyze training correlation and concentration,Week 1 gate,Hand calculation matches Python; covariance is symmetric; no filling missing returns with zero.
+W2-S4,2,S4,S3,Build training risk/correlation figures,Week 1 gate,Hand calculation matches Python; covariance is symmetric; no filling missing returns with zero.
+W2-S5,2,S5,S4,"Test zero-loss, immediate-loss and weight-constraint cases",Week 1 gate,Hand calculation matches Python; covariance is symmetric; no filling missing returns with zero.
+W3-S1,3,S1,S5,Freeze input hashes and universe exclusions,Week 2 gate,Weights sum to one; no negative weights; all estimates use pre-test data.
+W3-S2,3,S2,S1,Implement/inspect equal and inverse-volatility weights,Week 2 gate,Weights sum to one; no negative weights; all estimates use pre-test data.
+W3-S3,3,S3,S2,Fit minimum variance and compare on validation only,Week 2 gate,Weights sum to one; no negative weights; all estimates use pre-test data.
+W3-S4,3,S4,S3,Prepare feasible allocation cloud with weight drill-down,Week 2 gate,Weights sum to one; no negative weights; all estimates use pre-test data.
+W3-S5,3,S5,S4,"Review leakage, optimizer convergence and reproducibility",Week 2 gate,Weights sum to one; no negative weights; all estimates use pre-test data.
+W4-S1,4,S1,S5,Prepare permitted BI exports with provenance,Week 3 gate,Test dates are untouched during selection; rebalancing convention and costs are visible.
+W4-S2,4,S2,S1,"Compute held-out costs, wealth and historical tail risk",Week 3 gate,Test dates are untouched during selection; rebalancing convention and costs are visible.
+W4-S3,4,S3,S2,Run block-length and cost sensitivities after method freeze,Week 3 gate,Test dates are untouched during selection; rebalancing convention and costs are visible.
+W4-S4,4,S4,S3,Build BI pages and validate three user tasks,Week 3 gate,Test dates are untouched during selection; rebalancing convention and costs are visible.
+W4-S5,4,S5,S4,Run cluster seed array and compare local timing,Week 3 gate,Test dates are untouched during selection; rebalancing convention and costs are visible.
+W5-S1,5,S1,S5,Finalize WRDS/French attribution and publication scope,Week 4 gate,Second student reruns; export permissions checked; limitations and benchmark included.
+W5-S2,5,S2,S1,Reconcile selected portfolio metrics independently,Week 4 gate,Second student reruns; export permissions checked; limitations and benchmark included.
+W5-S3,5,S3,S2,Write experiment limitations and benchmark comparison,Week 4 gate,Second student reruns; export permissions checked; limitations and benchmark included.
+W5-S4,5,S4,S3,Complete workbook and six-slide presentation,Week 4 gate,Second student reruns; export permissions checked; limitations and benchmark included.
+W5-S5,5,S5,S4,"Reproduce release, record environments and audit contributions",Week 4 gate,Second student reruns; export permissions checked; limitations and benchmark included.
