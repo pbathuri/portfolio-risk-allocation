@@ -1,3 +1,5 @@
+> **Scope:** Return-data acquisition for the existing portfolio exercise and fallback. For the new forecasting project use [PROJECT_PROPOSAL.md](PROJECT_PROPOSAL.md) and [EXPERIMENT.md](EXPERIMENT.md). These return contracts do not apply to anonymous responders.
+
 # Market-data acquisition
 
 ## Preferred: WRDS / CRSP

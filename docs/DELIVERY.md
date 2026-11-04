@@ -1,14 +1,27 @@
-# Portfolio dashboard build sheet
+# Dashboard and resume evidence
 
-Use Tableau or Power BI with exports from notebook 04. Three pages:
-1. **Allocation comparison:** training-estimated return/volatility scatter; select a portfolio_id to display its asset weights; compare the three named baselines and HHI.
-2. **Realized performance:** held-out wealth curves, CAGR, volatility, drawdown and monthly VaR/ES; show test dates and the monthly rebalancing/cost convention.
-3. **Risk structure:** training correlation heatmap, per-asset weights and stress/uncertainty view; keep expected and realized measures visually distinct.
+## Three dashboard pages
 
-Relate portfolio_cloud to portfolio_weights on portfolio_id (one-to-many). Keep strategy-level test metrics separate from candidate-portfolio estimates. Do not imply all random portfolios have a backtest. For arbitrary weight sliders, implement the same vector/matrix equations in the BI layer or a reviewed Python calculation service; static CSV exports support selection among precomputed portfolios only. The minimum deliverable is interactive selection and comparison of those portfolios.
+1. **Forecast benchmark:** dataset identity, train/validation/test dates, zero/mean/ridge scores, daily error, selected symbol and sample counts. Mark test results unavailable until the final evaluation.
+2. **Adaptive monitor:** static and online feature-correlation views, covariance drift, alert counts and retrospective prediction errors. Explain warm-up and historical replay. Include a labeled synthetic shift test to demonstrate mechanics without claiming it validates real-market detection.
+3. **Research audit:** data permissions, frozen configuration, versions, missingness, runtime/memory, limitations and links to the run manifest/report. Keep the portfolio learning exercise in a separate view or notebook with its own data labels.
 
-Tableau: select portfolio_id via filter/highlight action, show weight bars linked through a relationship. Power BI: use portfolio_id slicer and a relationship to the weights table. Validate any aggregate at its grain; do not sum volatility or annualized return across rows.
+Controls select precomputed model/day/symbol views; they must not silently retune a model using the test set. Export CSVs at explicit grains with unique keys. Never sum R², volatility or correlation across dashboard rows. Show the actual source and date range in each view.
 
-Acceptance tasks: identify the lowest-volatility baseline on training data, compare its held-out drawdown with equal weight, and inspect a concentrated allocation. A peer should complete each in under two minutes. Reconcile three portfolio metrics manually and compare selected weight sums to 1.
+## Release gate
 
-A sample historical loss is not a future worst case. Label all expected values as training estimates. Submit a workbook or permitted interactive link, source/data-use note, outputs, and a six-slide presentation. If using French data, identify the investments as research industry portfolios. If WRDS terms restrict distribution, demonstrate within the permitted environment and publish only approved aggregate views.
+- Working loader, baselines, one fitted model and one real Cotton-library integration; the integration is not satisfied by merely citing a package.
+- One frozen run manifest and a single documented reproduction command; exact dependency versions and machine captured after execution.
+- Numerical and temporal-leakage checks pass; second student reproduces from a clean environment.
+- Held-out results, uncertainty and a failure-case discussion appear in a 2–3 page research report.
+- Dashboard totals reconcile with exported computations; five-minute peer demo completes the three intended tasks: compare models, inspect drift, trace provenance.
+- Permitted aggregate exports only; no unapproved raw competition data, credentials or sensitive notebook outputs in Git.
+- Contribution record identifies each student's authored and reviewed work; assistant-use log is current.
+
+Success does not require beating the baseline. A carefully explained failed hypothesis is credible research. Do not claim production readiness, profitable alpha, institutional adoption or affiliation with Jane Street/Peter Cotton.
+
+## Resume wording after completion
+
+“Co-developed a reproducible market-forecasting and online covariance-monitoring pipeline using Jane Street's public competition data and Python; compared ridge regression with simple baselines using chronological validation and built an interactive dashboard of held-out errors and distribution shifts.”
+
+Add measured dataset size, runtime and score differences only after verification. If using fallback data, replace the Jane Street-data claim. Each person should mention their own contribution and be able to explain the other half.

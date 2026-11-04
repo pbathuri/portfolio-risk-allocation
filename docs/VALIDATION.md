@@ -1,3 +1,18 @@
+# November 3, 2026 scope-update checks
+
+Documentation-only update: no Python code or dependencies changed.
+
+- Existing numerical/data-contract tests: 6 passed (`python -m unittest discover -s tests`).
+- Current top-level README/docs relative Markdown links resolve.
+- Backlog: eight tasks across four weeks, each assigned to A or B with the other as reviewer.
+- `git diff --check`: passed.
+- New Jane Street forecasting model, precise integration and dashboard: planned, not executed or validated.
+- Full notebook execution and hosted CI were not rerun locally for this documentation change. The existing CI workflow remains in place.
+
+## Historical starter validation
+
+> This record describes the original starter validation. It does not validate the planned Jane Street model or Cotton-library integration. The November 3 revision changes project documentation only.
+
 # Package validation
 
 Validation performed on 2026-10-14 UTC.

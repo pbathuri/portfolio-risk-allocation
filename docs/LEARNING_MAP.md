@@ -1,13 +1,14 @@
-# Learning goals and evidence
+# DSC learning goals and evidence
 
-Each reading is a 20–30 minute start, followed by a concrete exercise. Links are in SOURCES.md. The mentor asks each student to demonstrate the learning goal, not just show a completed file.
 
-| Week | Read | Practice | Learning goal | Evidence |
-|---|---|---|---|---|
-| 1 | WRDS Python README and CIZ overview linked in SOURCES.md | Inspect one entitled table and explain its total-return field. | Acquire and clean financial data | Documented return contract and missingness decisions |
-| 2 | METHODS.md: return/risk equations | Calculate two-asset variance, then trace a three-month wealth path. | Understand portfolio statistics | Hand check and training covariance report |
-| 3 | METHODS.md: allocation rules | Explain why correlation changes minimum-variance weights. | Compare asset allocation methods | Three baselines with validation-only decisions |
-| 4 | DELIVERY.md and METHODS.md: uncertainty/costs | Change one cost assumption and one block length; explain the difference. | Evaluate and visualize risk-return trade-offs | Held-out dashboard, sensitivity and HPC record |
-| 5 | REVIEW.md and RELEASE.md | Distinguish an estimated return from a realized result in one sentence. | Communicate decision support responsibly | Reproduced workbook and limitations defense |
+This preserves the goals in the [original DSC learning map](archive/five-week-plan/LEARNING_MAP.md), compressed into the selected four-week scope.
 
-Across all five weeks: each student authors one small reviewed PR weekly, reviews the preceding seat’s work, records meaningful assistant use, and can rerun another student’s notebook. In Week 4, each team executes one real cluster job if access is available and explains its CPU/memory choice. An unavailable allocation must be reported, never disguised.
+| Existing goal | Four-week evidence |
+|---|---|
+| Acquire and clean financial data | Week 1 data register, missingness decisions, permitted-use note |
+| Understand portfolio statistics | Week 2 two-asset variance hand calculation on actual-return or labeled synthetic exercise; explain feature covariance separately |
+| Compare asset allocation methods | Week 2 bounded existing exercise comparing the three allocation baselines; distinguish allocation from supervised prediction |
+| Evaluate and visualize risk-return trade-offs | Weeks 3–4 retain the allocation exercise and its risk-return plot; main dashboard evaluates forecast error and drift without calling responders returns |
+| Communicate decision support responsibly | Week 4 report, limitations, reproducible demo and individual explanation |
+
+The original five-week learning sequence is compressed, not represented as already completed. A real cluster run remains conditional on access; a CPU smoke benchmark suffices operationally, with unavailable HPC recorded explicitly.

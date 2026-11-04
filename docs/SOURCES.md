@@ -1,3 +1,5 @@
+> Current hybrid-project references and evidence limits: [PROJECT_PROPOSAL.md](PROJECT_PROPOSAL.md). The sources below support the retained portfolio exercises.
+
 # Reference desk
 
 Verified as documentation sources on 2026-10-14. Recheck access, versions and terms at cohort freeze. URLs are learning and provenance references; no live service availability is promised.

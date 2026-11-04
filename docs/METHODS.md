@@ -1,3 +1,5 @@
+> **Scope:** Portfolio methods for the retained learning exercise and fallback. For the new forecasting project use [PROJECT_PROPOSAL.md](PROJECT_PROPOSAL.md) and [EXPERIMENT.md](EXPERIMENT.md). These return contracts do not apply to anonymous responders.
+
 # Portfolio experiment
 
 Freeze the universe, dates and metric definitions in Week 1. The baseline uses training data only to estimate all three allocation rules and holds the target weights fixed thereafter, with monthly rebalancing. Validation is for diagnosing and choosing optional changes; all three predefined baselines may be reported on the test period. Do not repeatedly choose the best-looking test strategy.

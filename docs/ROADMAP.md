@@ -1,67 +1,17 @@
-# Five-week roadmap
+# Four weeks, two owners
 
-Week 1 begins at kickoff; enter actual dates on the issue board. Every gate needs a peer review and mentor sign-off.
+Kickoff: Saturday November 7, 2026, 10:00–11:00 a.m., America/Indiana/Indianapolis (assumed from this week's meeting request). Final review: Saturday December 5, 10:00 a.m., after four build weeks. Account for Thanksgiving availability at kickoff.
 
-## Week 1 — Acquire and define the experiment
+A owns data and predictive modeling; B owns covariance monitoring and dashboard exports. Each reviews the other's PR. Both explain the methods and rerun the other's work. Fill in names at kickoff; the mentor handles scope decisions. Each student authors at least one small PR per week. Preserve the repository's assistant-use log and peer-review requirements.
 
-**Build:** Check WRDS access and schema; agree universe, frequency and fixed date boundaries.
+| Week / review | A delivers | B delivers | Acceptance gate |
+|---|---|---|---|
+| 1: Nov 7–13 / Nov 14 | Access check, bounded data loader, schema/missingness audit | Frozen chronological split, hand-calculated metric tests, dashboard wireframe | Manifest and data contract; both run the starter; no leakage across dates |
+| 2: Nov 14–20 / Nov 21 | Zero/mean/ridge comparisons on validation | `precise` smoke test and static-vs-online covariance comparison | Reproducible validation table; causal update test; portfolio-statistics hand exercise |
+| 3: Nov 21–27 / Nov 28 | Error breakdowns, small tuning log, frozen model | Three dashboard pages linked to real computed outputs | Peer walkthrough, frozen configuration, limitations draft; test remains unopened |
+| 4: Nov 28–Dec 4 / Dec 5 | One final test evaluation, paired uncertainty analysis | Clean-environment reproduction, dashboard and demonstration | Both reproduce; report and run manifest agree; no invented results |
 
-**Learn:** Distinguish prices from total returns; inspect delistings, identifiers and missing returns.
+Plan Week 3 as a lighter holiday week: no new model families or infrastructure. If work slips, reduce dashboard polish and retain the benchmark, monitor, leakage tests and report.
 
-**Evidence:** Canonical returns.csv, data register and signed experiment plan.
 
-**Done when:** Unique date/asset keys; decimal returns; approved training/validation/test dates.
-
-**Work split:** S1 audits inputs; S2 implements or verifies transformations; S3 owns the analysis decision; S4 communicates it; S5 reruns and records failures. See BACKLOG.csv for concrete assignments.
-
-## Week 2 — Measure return and risk
-
-**Build:** Calculate annualized mean, covariance, volatility, correlation and drawdown.
-
-**Learn:** Derive portfolio variance, including covariance terms, for two assets.
-
-**Evidence:** Metric notebook, covariance heatmap and benchmark report.
-
-**Done when:** Hand calculation matches Python; covariance is symmetric; no filling missing returns with zero.
-
-**Work split:** S1 audits inputs; S2 implements or verifies transformations; S3 owns the analysis decision; S4 communicates it; S5 reruns and records failures. See BACKLOG.csv for concrete assignments.
-
-## Week 3 — Compare allocation rules
-
-**Build:** Fit three baselines; generate feasible portfolios; select any tuning on validation only.
-
-**Learn:** Explain instability in estimated means and the effect of concentration.
-
-**Evidence:** Weights, validation comparison, allocation cloud and method decision.
-
-**Done when:** Weights sum to one; no negative weights; all estimates use pre-test data.
-
-**Work split:** S1 audits inputs; S2 implements or verifies transformations; S3 owns the analysis decision; S4 communicates it; S5 reruns and records failures. See BACKLOG.csv for concrete assignments.
-
-## Week 4 — Stress and visualize
-
-**Build:** Freeze method; evaluate test period once; add block-bootstrap uncertainty and dashboard controls.
-
-**Learn:** Explain expected versus realized risk; test sensitivity to start dates and costs.
-
-**Evidence:** Dashboard, held-out metrics, HPC run record and stress memo.
-
-**Done when:** Test dates are untouched during selection; rebalancing convention and costs are visible.
-
-**Work split:** S1 audits inputs; S2 implements or verifies transformations; S3 owns the analysis decision; S4 communicates it; S5 reruns and records failures. See BACKLOG.csv for concrete assignments.
-
-## Week 5 — Release and defend
-
-**Build:** Reproduce results from a fresh environment; document data-publication restrictions.
-
-**Learn:** Communicate uncertainty and distinguish historical comparison from advice.
-
-**Evidence:** Interactive dashboard, 6-slide brief and release record.
-
-**Done when:** Second student reruns; export permissions checked; limitations and benchmark included.
-
-**Work split:** S1 audits inputs; S2 implements or verifies transformations; S3 owns the analysis decision; S4 communicates it; S5 reruns and records failures. See BACKLOG.csv for concrete assignments.
-
-## If time gets tight
-
-Keep acquisition, one defensible baseline, validation and the final explanation. Defer extra seasons/assets, advanced models and visual polish. Do not replace missing real data with unlabeled demo outputs.
+See [learning goals](LEARNING_MAP.md), [kickoff](KICKOFF.md), and [task backlog](BACKLOG.csv).

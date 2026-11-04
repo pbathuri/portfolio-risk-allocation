@@ -1,21 +1,14 @@
-# Working as a team
+# Two-person working agreement
 
-| Seat | Primary responsibility | Name |
-|---|---|---|
-| S1 | Market-data steward | Fill at kickoff |
-| S2 | Risk engineer | Fill at kickoff |
-| S3 | Allocation analyst | Fill at kickoff |
-| S4 | Dashboard builder | Fill at kickoff |
-| S5 | Validation lead | Fill at kickoff |
+| Seat | Ownership | Reviewer | Name |
+|---|---|---|---|
+| A | Data contract, preprocessing, baseline and ridge model, evaluation report | B | Fill at kickoff |
+| B | Static/online covariance monitor, dashboard exports, reproduction | A | Fill at kickoff |
 
-| Executive mentor | Scope, methods review, blocker escalation and acceptance | Fill at kickoff |
+Budget 6–8 hours per person per week for four weeks. Each authors one small PR weekly and reviews the other person's work. Swap reproduction responsibility in Week 4. Both explain the model, monitoring assumptions and portfolio-statistics exercise. The mentor handles scientific scope and acceptance decisions.
 
-Each week everyone spends roughly 1 hour reading/practice, 2–3 hours building, 1 hour testing/review, and 1 hour meeting/documentation. Pair students with different strengths. Roles describe ownership, not permission to avoid learning another part of the workflow.
+Use `week-N/short-topic` branches, one notebook owner per branch, and the existing PR template. Keep reusable code in `src/`. PRs include a reproduction command, test evidence and a limitation. Never approve your own PR. Record assistant use in [AI_LOG.csv](AI_LOG.csv), following [AGENT_POLICY.md](AGENT_POLICY.md).
 
-Review ring: S1 reviews S2, S2 reviews S3, S3 reviews S4, S4 reviews S5, S5 reviews S1. Rotate the meeting facilitator weekly. In Week 4, swap the analysis and data roles for the reproduction exercise. No one approves their own PR. The mentor reviews changes to the scientific question, cohort/universe, statistical design or publication policy.
+Weekly meeting: 5 minutes blockers, 20 minutes two demos, 15 minutes evidence review, 15 minutes pair planning and 5 minutes assignments. Record named owners at kickoff. If blocked for 30 minutes, pair; after one day, escalate and use the documented fallback. HPC is conditional on access and must not block the CPU-first MVP.
 
-Weekly meeting: 5 minutes blockers, 15 minutes two demos, 15 minutes evidence review, 15 minutes pair planning, 10 minutes issue assignment. Show a table, figure or failing test rather than a verbal percentage-complete update.
-
-Use `week-N/short-topic` branches. One notebook owner per branch avoids JSON merge conflicts. Move reusable code into `src/`; clear sensitive notebook outputs before committing. A PR needs a question, a change summary, a reproduction command, a test result and one limitation. Small PRs should take under 15 minutes to review.
-
-Blocked for 30 minutes? Record what you tried and ask your pair. Blocked for a day? Ask the mentor to choose a fallback. No access to HPC by Week 2 means run locally and retain the job scripts; do not claim a cluster run happened.
+See [ROADMAP.md](ROADMAP.md) and [BACKLOG.csv](BACKLOG.csv) for dates and acceptance gates. The archived five-seat plan is historical only.

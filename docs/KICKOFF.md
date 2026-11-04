@@ -1,19 +1,12 @@
-# First Zoom call | 60 minutes
+# Saturday kickoff — November 7, 2026
 
-**Before the call:** Mentor tests the demo once and shares the repo. Students install Python/Git, sign into GitHub, and read the project question. An installation problem is a valid first issue, not a reason to skip the call.
+10:00–11:00 a.m. America/Indiana/Indianapolis; timezone assumed from the organizer.
 
-| Minutes | Activity | Leave with |
-|---|---|---|
-| 0–8 | Each person: name, relevant experience, one thing they want to learn | Five learning goals |
-| 8–15 | Mentor explains the question using one concrete example | Agreed minimum scope |
-| 15–25 | Pair-run notebook 00; one student shares screen | Everyone sees a working output |
-| 25–35 | Open one raw fixture; predict a result before running a cell | A shared data vocabulary |
-| 35–45 | Map S1–S5 to names; discuss access and weekly availability | Owners, reviewers, meeting dates |
-| 45–55 | Each student creates a branch and a small documentation PR | First reviewed contribution |
-| 55–60 | Read back Week 1 acceptance criteria and blockers | Five assigned issues and next meeting |
 
-Opening question: **How do allocation choices change risk, and do those trade-offs survive a later period?**
+- 10:00–10:10: agree the hybrid question, two-person scope and individual learning goals.
+- 10:10–10:25: run existing demo; check Kaggle access and inspect a small schema sample.
+- 10:25–10:40: hand-calculate the prediction metric; distinguish features/responders from returns; draw temporal splits.
+- 10:40–10:50: assign the Week 1 issues and reciprocal reviewers; set the CPU/data limits.
+- 10:50–11:00: record decisions, holiday availability, fallback trigger and next review evidence.
 
-If setup fails, pair with someone who can run the demo and open a setup issue with OS, Python version and the exact error. Do not spend the entire meeting installing packages.
-
-After the call, the mentor posts a brief decision log in the repo: scope, dates, role assignments, access blockers and fallback choice. Do not paste meeting recordings or personal details into a public repo.
+Before the meeting: read the proposal and experiment contract, install the existing starter environment, and inspect competition access terms. Do not download the full dataset as the first action.
