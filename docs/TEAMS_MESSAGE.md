@@ -1,3 +1,5 @@
+> DRAFT ON HOLD: revise the data-source assignment after the organizer resolves the competition-use restriction documented in DATA.md. Do not send this draft unchanged.
+
 Hi everyone! I’ve updated the repo around our combined direction: a Jane Street forecasting study with Peter Cotton’s online covariance ideas.
 
 Before **Saturday at 10 a.m.**, please spend around **2–3 hours each** on a small checkpoint so we can start the meeting with results:

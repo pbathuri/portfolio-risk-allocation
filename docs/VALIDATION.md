@@ -24,3 +24,7 @@ Real Kaggle access/downloads, exact competition field availability and label-rel
 Source-partition completeness must be checked by the data owner; preparation preserves groups within the supplied file only. A small selected slice is not proof of representativeness.
 
 The previous project's validation record is retained under `legacy/portfolio/docs/VALIDATION.md` and does not validate the new workflow. Hosted CI status is available on GitHub for the published commit.
+
+## Signed-in browser follow-up
+
+The user is signed in, but the data page still requests competition-rules acceptance. The official data description confirms `responder_6`, 79 anonymized input features, unique date/time/symbol keys, varying time intervals, and prior-day responder availability at the next day's first time step. More importantly, rules section B.7 limits use to competition participation/Kaggle forums and requires deleting data after the competition. The standalone student-project data route is on hold pending a permitted replacement source or appropriate permission. No agreement was accepted and no real data was downloaded.

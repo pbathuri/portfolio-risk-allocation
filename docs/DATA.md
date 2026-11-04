@@ -1,20 +1,22 @@
 # Data acquisition and checkpoint contract
 
+> **Real-data plan on hold:** The signed-in official rules were inspected November 3, 2026. They restrict the data to competition participation/Kaggle forums and require deletion after the competition ends (section B.7). This does not establish permission for the proposed standalone student project. Do not accept rules or download this dataset merely to complete this checklist. Use the synthetic exercises while the organizer chooses an appropriately permitted source or obtains permission. No competition data has been downloaded. [Official rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules).
+
 Primary source: [Jane Street Real-Time Market Data Forecasting data](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/data). Read the [rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules) with your own account. Public access does not establish unrestricted redistribution. No real competition data is bundled or downloaded by the demo.
 
 ## Verified access preflight
 
 On November 3, 2026, the official file-listing command succeeded using Kaggle CLI 2.2.5. The smallest listed training partition was `train.parquet/partition_id=0/part-0.parquet` (470,341,709 bytes, about 470 MB). Listing files does **not** prove download access: the subsequent download returned HTTP 403 for the current account. Real-data execution is pending access resolution.
 
-Before allocating download time, review/accept the competition rules in the same account used by the CLI. If already accepted, check that the CLI credentials belong to that account. Do not share tokens. A missing-dependency error before any HTTP request indicates a broken local CLI environment, not a competition permission failure; use a clean CLI environment or the web download route.
+The later signed-in rules review found a use restriction, not just an authentication prerequisite; the data route is on hold as noted above. Accepting the rules alone does not resolve the proposed project use. Do not share tokens. A missing-dependency error before any HTTP request indicates a broken local CLI environment, not a competition permission failure; use a clean CLI environment or the web download route.
 
-Once access is enabled, the verified command target is:
+For reference only, the verified file-list target was (do not run pending scope resolution):
 
 ```bash
 kaggle competitions download jane-street-real-time-market-data-forecasting -f 'train.parquet/partition_id=0/part-0.parquet' -p data/raw
 ```
 
-Inspect the actual downloaded path before passing it to `inspect_source.py`; no real source schema or date IDs have yet been verified by this repository's maintainer.
+Inspect the actual downloaded path before passing it to `inspect_source.py`; the official page confirms the documented field names, variable time intervals, and previous-day responder availability at the next day's first time step; actual file contents and date IDs remain unverified.
 
 ## Pull a bounded input
 

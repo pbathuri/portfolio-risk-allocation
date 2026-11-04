@@ -1,5 +1,7 @@
 # DSC Fintech — Adaptive Market Forecasting & Risk Monitor
 
+> **Real-data plan on hold:** The signed-in official rules were inspected November 3, 2026. They restrict the data to competition participation/Kaggle forums and require deletion after the competition ends (section B.7). This does not establish permission for the proposed standalone student project. Do not accept rules or download this dataset merely to complete this checklist. Use the synthetic exercises while the organizer chooses an appropriately permitted source or obtains permission. No competition data has been downloaded. [Official rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules).
+
 A **two-person, four-week** research project combining Jane Street's public forecasting challenge with Peter Cotton's online covariance work. We ask: **does a simple predictor remain useful over time, and can an adaptive covariance monitor expose changes in its inputs and errors?**
 
 ## Before Saturday: start here

@@ -1,5 +1,7 @@
 # Before Saturday: a small forecasting checkpoint
 
+> **Real-data plan on hold:** The signed-in official rules were inspected November 3, 2026. They restrict the data to competition participation/Kaggle forums and require deletion after the competition ends (section B.7). This does not establish permission for the proposed standalone student project. Do not accept rules or download this dataset merely to complete this checklist. Use the synthetic exercises while the organizer chooses an appropriately permitted source or obtains permission. No competition data has been downloaded. [Official rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules).
+
 **Due:** Saturday November 7, 2026, before the 10 a.m. meeting (America/Indiana/Indianapolis). **Budget:** 2–3 hours per person. Claim A or B in the Teams channel now. Work together on the same agreed source/slice; do not independently choose different datasets.
 
 The starter intentionally supplies basic code. Your work is to obtain permitted data, make and document the selection, verify what the features mean computationally, inspect development outputs, and explain what you learned. Running a supplied command alone is not the full assignment.
