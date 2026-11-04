@@ -1,44 +1,22 @@
-# November 3, 2026 scope-update checks
+# Forecasting checkpoint validation — November 3, 2026
 
-Documentation-only update: no Python code or dependencies changed.
+## Implemented and exercised
 
-- Existing numerical/data-contract tests: 6 passed (`python -m unittest discover -s tests`).
-- Current top-level README/docs relative Markdown links resolve.
-- Backlog: eight tasks across four weeks, each assigned to A or B with the other as reviewer.
-- `git diff --check`: passed.
-- New Jane Street forecasting model, precise integration and dashboard: planned, not executed or validated.
-- Full notebook execution and hosted CI were not rerun locally for this documentation change. The existing CI workflow remains in place.
+- New forecasting tests: 17 cases. Fresh Python 3.11 environment: 16 passed, one optional Parquet test skipped because the default requirements do not include a Parquet engine. In the existing environment with pyarrow: all 17 pass.
+- Four new notebooks: valid schemas and successful execution in actual fresh Jupyter kernels on Python 3.11.
+- Synthetic CLI: zero/mean/ridge metrics, predictions, missingness, feature catalog and manifests generated; final test not scored.
+- Source inspection and bounded preparation exercised with synthetic CSV; Parquet selection exercised in the pyarrow-enabled environment.
+- Original portfolio exercises: six numerical/data-contract tests still pass after relocation.
+- Python compile checks, active documentation links, ten-task owner/reviewer backlog, empty committed notebook outputs and `git diff --check` pass.
 
-## Historical starter validation
+Meaningful coverage includes hand-calculated weighted metrics, undefined denominators, invalid weights, duplicate keys, complete-date splits, same-symbol/day lag resets, future-feature isolation, held-out-target isolation, training-only preprocessing, all-missing columns, demo/real output separation, row-cap rejection and changed-input manifest rejection.
 
-> This record describes the original starter validation. It does not validate the planned Jane Street model or Cotton-library integration. The November 3 revision changes project documentation only.
+No lint/type-check tooling is configured in the repository; compile checks are not presented as a type-checker run. No new required dependencies were added. Versions of numerical packages and Python are written into each run manifest; record a full environment lock for research releases.
 
-# Package validation
+## Not validated or completed
 
-Validation performed on 2026-10-14 UTC.
+Real Kaggle access/downloads, exact competition field availability and label-release timing, a purged split, the competition online inference API, real-data accuracy, `precise` integration, uncertainty analysis, final test evaluation, interactive dashboard and cluster execution remain team work. No market-performance or profitable-trading claim is made. The default workflow intentionally withholds test evaluation.
 
-| Check | Result |
-|---|---|
-| Python numerical and data-contract tests | 17 passed (sports 5, fintech 6, biology 6) |
-| Notebook schema | All 18 validated with nbformat |
-| Notebook Python cells | All 18 ran successfully; fresh Python process per notebook |
-| Demo sensitivity scripts | All 3 completed with seed 0 |
-| Python compilation | All supplied Python files compiled |
-| Shell/Slurm syntax | Checked with bash -n |
-| ZIP integrity | Verified when packaged |
+Source-partition completeness must be checked by the data owner; preparation preserves groups within the supplied file only. A small selected slice is not proof of representativeness.
 
-Jupyter kernel integration was attempted but this environment prohibits the local network interface used by the kernel. The cell-execution checks do not claim frontend/kernel integration passed. The included GitHub CI runs the actual nbclient workflow in a standard runner; no hosted CI run has occurred yet.
-
-Real WRDS access, the French/GDC live acquisition scripts, R/DESeq2 installation and execution, actual Slurm submissions, and Tableau/Power BI workbooks were not executed here. They require the students' source access, software or institutional environment. The package contains ready-to-run adapters and instructions, not an assertion that those services were tested. Real biological inference deliberately fails without DESeq2 rather than substituting the demo test.
-
-No remote GitHub repositories were created. The three independent repository folders and publish_repos.sh prepare that step. No real research data or research findings are bundled.
-
-Test environment: Python 3.12.14. Recommended classroom/CI baseline: Python 3.11. Dependency ranges are supplied; create a lock after validating the classroom environment.
-
-- numpy: 2.3.5
-- pandas: 2.2.3
-- scipy: 1.17.0
-- matplotlib: 3.10.8
-- scikit-learn: 1.8.0
-- nbformat: 5.11.1
-- nbclient: 0.11.0
+The previous project's validation record is retained under `legacy/portfolio/docs/VALIDATION.md` and does not validate the new workflow. Hosted CI status is available on GitHub for the published commit.

@@ -1,48 +1,57 @@
 # DSC Fintech — Adaptive Market Forecasting & Risk Monitor
 
-**Selected direction:** combine the equally supported experimental and research options: evaluate a simple predictive model on Jane Street's public competition data and use Peter Cotton's `precise` library to study changing feature covariance. Two students, four weeks, one reproducible analytical dashboard.
+A **two-person, four-week** research project combining Jane Street's public forecasting challenge with Peter Cotton's online covariance work. We ask: **does a simple predictor remain useful over time, and can an adaptive covariance monitor expose changes in its inputs and errors?**
 
-**Research question:** Does a simple market-response predictor remain useful across time, and can an online covariance monitor expose changes in its inputs and error profile?
+## Before Saturday: start here
 
-## Start here
+Complete the [pre-Saturday checklist](docs/BEFORE_SATURDAY.md) before **November 7, 2026, 10 a.m. America/Indiana/Indianapolis**. Budget 2–3 hours each. Bring a reproducible small data slice, a feature explanation, a first validation table, and any access blockers. A synthetic-only run is an honest fallback, not a real-data result.
 
-- [Project scope and verified sources](docs/PROJECT_PROPOSAL.md)
-- [Saturday November 7, 10 a.m. kickoff](docs/KICKOFF.md)
-- [Four-week roadmap](docs/ROADMAP.md), [two-person ownership](docs/TEAM.md), and [eight-task backlog](docs/BACKLOG.csv)
-- [DSC learning goals](docs/LEARNING_MAP.md) and [experiment contract](docs/EXPERIMENT.md)
-- [Dashboard, research report and resume evidence](docs/DELIVERY.md)
+## Run the new starter
 
-## What works today versus what the team will build
+From the repository root, with Python 3.11:
 
-The existing runnable code and notebooks implement the original portfolio-risk learning exercises using synthetic fixtures or separately acquired return data. The Jane Street loader, predictive benchmark, `precise` integration and new dashboard are **planned work**, not implemented results. Follow the four-week roadmap; the numbered Week 1–5 notebooks remain reference exercises, not the current schedule.
-
-Preserve those exercises to learn portfolio variance and allocation comparison. Never treat anonymized competition responders as tradable returns or translate their scores into profit. A well-supported negative finding meets the research objective.
-
-## First run (Python 3.11)
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python scripts/run_demo.py
-jupyter lab
+python scripts/run_forecasting.py --demo
+python -m unittest discover -s tests
 ```
-Windows PowerShell activation: `.venv\Scripts\Activate.ps1`. On macOS, Tableau is a practical choice; Power BI Desktop requires a supported Windows environment.
 
-Open `notebooks/00_kickoff.ipynb` for the existing starter. Use later notebooks as the portfolio learning exercises selected in the new roadmap. All Python notebook kernels use this environment. `PROJECT_MODE=demo` is the default and uses generated synthetic fixtures. Real mode reads files described in `docs/DATA.md`. To launch real mode on macOS/Linux:
+Windows PowerShell activation: `.venv\Scripts\Activate.ps1`. All subsequent commands are the same. CSV mode and the synthetic demo use existing dependencies. For Parquet, use an environment that already includes `pyarrow` (such as Kaggle's notebook environment), or export the bounded CSV there. No new dependency is required by the default workflow.
+
+The demo writes clearly labeled synthetic artifacts under `outputs/demo/`: baseline metrics, train/validation predictions, development missingness, a feature catalog and a split/version manifest. **The final test partition is withheld.**
+
+For permitted real inputs, follow [DATA.md](docs/DATA.md), then run:
+
 ```bash
-PROJECT_MODE=real jupyter lab
+python scripts/run_forecasting.py --input data/processed/checkpoint.csv
 ```
-PowerShell: `$env:PROJECT_MODE="real"; jupyter lab`. Never combine real and demo exports; each has its own output directory.
 
-## Work agreement
-Read `docs/ROADMAP.md` for milestones, `docs/TEAM.md` for owners and reviews, and `docs/AGENT_POLICY.md` before using a coding assistant. Start with `docs/KICKOFF.md` at the first Zoom call. The executive mentor owns scientific scope and acceptance decisions; students own implementation and explanations. The previous five-week planning documents are retained under `docs/archive/five-week-plan/` for provenance.
+Real outputs go to `outputs/real/`. Keep inputs, row-level predictions and generated notebook outputs off GitHub. Only commit approved aggregate summaries and code. The [checkpoint template](docs/CHECKPOINT_TEMPLATE.md) tells you what evidence to bring.
 
-## Files you will use
-- `notebooks/`: six working notebooks, with prompts for the team's decisions.
-- `src/project.py`: tested baseline calculations; refactor small pieces here rather than copying cells.
-- `docs/DATA.md`, `docs/METHODS.md`: contracts, acquisition and statistical choices.
-- `docs/DELIVERY.md`: figures, dashboard or scientific presentation, and acceptance checklist.
-- `hpc/`: parameterized Slurm examples; allocation and environment are configured locally.
-- `tests/`: numerical and data-contract checks. Run `python -m unittest discover -s tests`.
+## What is implemented
 
-Dependencies are bounded in `requirements.txt`, not claimed as a cross-platform lock. After the team confirms its environment, save `python -m pip freeze > environment.lock.txt`, record OS/Python, and use that file for reruns. Do not put credentials or raw licensed data in Git.
+- Chunked local CSV/Parquet selection with explicit dates, symbols, row cap and source hashes.
+- Schema checks, duplicate-key rejection, chronological whole-date 60/20/20 splits.
+- Ten raw features, missingness flags and three same-symbol/same-day lag features.
+- Training-only median imputation/scaling and zero/mean/ridge baselines.
+- Tests of metrics, future-data isolation, lags and data selection; four learning notebooks.
+
+**Still to build during the four weeks:** the real-data experiment, `precise` monitor, model/feature ablations, uncertainty analysis, interactive dashboard and final test evaluation. Synthetic results validate the starter mechanics only. Existing notebooks do not claim a completed model or dashboard.
+
+## Team workflow
+
+[Saturday preparation](docs/BEFORE_SATURDAY.md) → [meeting agenda](docs/KICKOFF.md) → [roadmap](docs/ROADMAP.md) → [experiment contract](docs/EXPERIMENT.md) → [delivery criteria](docs/DELIVERY.md).
+
+[Two-person ownership](docs/TEAM.md), [task backlog](docs/BACKLOG.csv), [DSC learning map](docs/LEARNING_MAP.md), [source evidence](docs/SOURCES.md), [validation record](docs/VALIDATION.md) and [assistant-use policy](docs/AGENT_POLICY.md).
+
+| Location | Purpose |
+|---|---|
+| `src/forecasting.py` | Validated features, splits, baseline metrics and checkpoint exports |
+| `scripts/` | Source inspection, slice preparation, baseline runs and notebook checks |
+| `notebooks/00_setup.ipynb` through `03_baselines.ipynb` | Guided synthetic exercises; explicit opt-in instructions for real data |
+| `docs/` | Current forecasting plan, task assignments, methods and evidence templates |
+| `legacy/portfolio/` | Original portfolio allocation code and notebooks, isolated as an optional DSC statistics exercise |
+
+The original five-seat planning documents are archived under `docs/archive/five-week-plan/`. They do not define current deadlines. The repository name is retained for continuity.

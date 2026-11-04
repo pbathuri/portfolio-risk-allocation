@@ -1,26 +1,52 @@
-> **Scope:** Return-data acquisition for the existing portfolio exercise and fallback. For the new forecasting project use [PROJECT_PROPOSAL.md](PROJECT_PROPOSAL.md) and [EXPERIMENT.md](EXPERIMENT.md). These return contracts do not apply to anonymous responders.
+# Data acquisition and checkpoint contract
 
-# Market-data acquisition
+Primary source: [Jane Street Real-Time Market Data Forecasting data](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/data). Read the [rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules) with your own account. Public access does not establish unrestricted redistribution. No real competition data is bundled or downloaded by the demo.
 
-## Preferred: WRDS / CRSP
-Each student needs their own authorized institutional access and the required CRSP subscription. WRDS is not an appropriate source for the basketball or TCGA projects. Install the optional client with `pip install -r requirements-wrds.txt`. Run `python scripts/wrds_schema.py` interactively; it lists accessible CRSP schemas/tables and lets you inspect a table before querying. Never put passwords in a notebook or GitHub.
+## Pull a bounded input
 
-CRSP has legacy and CIZ formats. Do not assume a table or column exists. After inspecting the entitled table and reading its return definition, use the WRDS web query or a reviewed parameterized SQL query to export monthly date, permanent identifier and **total return**. CIZ return handling differs from legacy; do not add a delisting adjustment to a field that already includes it. For a legacy extraction, document whether and how `(1+RET)*(1+DLRET)-1` is applicable. Review missing delisting returns with the mentor instead of assigning zero.
+Use Kaggle's web file listing to inspect size and download **one training file**, not the whole competition. If you already use the authenticated official CLI:
 
-Save the raw extract outside Git. Use `scripts/normalize_wrds.py --input PATH --date DATE_COLUMN --asset PERMANENT_ID_COLUMN --ret TOTAL_RETURN_COLUMN` after preparing any format-specific adjustments. The adapter deliberately does not infer CRSP methodology. It records the raw-file hash and refuses nonnumeric return flags, duplicates and impossible values. Put table/version, filters, adjustment rules, access date, coverage and terms in DATA_REGISTER.csv.
+```bash
+kaggle competitions files jane-street-real-time-market-data-forecasting
+kaggle competitions download jane-street-real-time-market-data-forecasting -f 'EXACT_FILE_FROM_LISTING' -p data/raw
+```
 
-Choose the universe using information available at the training start. A present-day list of successful stocks creates survivorship bias. A fixed illustrative universe may be used for allocation education if selection bias is clearly disclosed; it cannot support claims of a tradable historical strategy. Restrict to a complete common date window only after reporting excluded securities and dates. Avoid silently dropping assets that delisted during testing.
+Replace the placeholder with the actual listed path; extract a ZIP locally if returned. See [official CLI commands](https://github.com/Kaggle/kaggle-cli/blob/main/docs/competitions.md). Credentials belong in Kaggle's documented local credential mechanism, never in Git or notebook cells. CLI installation is optional; web download is sufficient.
 
-## Public fallback: French 10 Industry Portfolios
-Run `python scripts/fetch_french.py`. This fetches the value-weighted monthly returns section from the official ZIP, converts percentages to decimals, records the hash and writes the canonical file. Verify the resulting date span and metadata before analysis. These are research equity-industry portfolios, not ETFs you can directly buy and not bonds/commodities/cash. With this fallback, title the dashboard “Equity Industry Allocation” and narrow claims accordingly. Do not imply WRDS was used.
+Prefer a private Kaggle notebook if the source is too large for the laptop. Attach the official competition data there; place this repo's `src/forecasting.py` and `scripts/prepare_forecasting.py` in the same relative layout, inspect the actual mounted training path, then run the same selection command using that path. Kaggle normally supplies Parquet support; check the environment. Export a bounded CSV only if terms permit, otherwise keep the entire exercise in that environment.
 
-## Canonical contract: data/raw/returns.csv
-| Field | Contract |
+## Inspect, choose, prepare
+
+```bash
+python scripts/inspect_source.py --input data/raw/SELECTED_FILE.parquet
+```
+
+This streams only date and symbol identifiers and prints schema plus group counts. Choose the earliest suitable block of about 30 consecutive available dates and 2–3 symbols. Record exclusions without consulting responder values. Identify the chosen source's partition boundaries so no selected date/symbol group is incomplete. The tool guarantees completeness only within the supplied file.
+
+Example command shape — **replace all IDs and the filename with the inspected values**:
+
+```bash
+python scripts/prepare_forecasting.py --input data/raw/SELECTED_FILE.parquet --start-date 0 --end-date 29 --symbols 0 1 2 --output data/processed/checkpoint.csv
+python scripts/run_forecasting.py --input data/processed/checkpoint.csv
+```
+
+IDs 0–29 and symbols 0/1/2 are examples, not guaranteed available rows. The preparation command accepts CSV too. It streams in batches, projects required columns, preserves matching groups and fails above 500,000 selected rows. Reduce whole groups if needed. At least 10 distinct dates are required; 30+ is preferable. Hashing reads the whole source file once for provenance; account for that I/O.
+
+## Required schema
+
+| Columns | Contract |
 |---|---|
-| date | ISO month-end; one observation per month per asset |
-| asset | Stable identifier, not a time-varying ticker alone |
-| ret | Decimal simple total return, including distributions; ≥ −1 |
+| `date_id`, `time_id`, `symbol_id` | Nonnegative integer identifiers; unique combined key |
+| `weight` | Finite nonnegative evaluation/sample weight; positive total in each scored split |
+| `feature_00` … `feature_09` | Ten numeric contemporaneous inputs; NaN allowed, infinity rejected |
+| `responder_6` | Numeric target; finite for train/validation, never used as a feature; final test target may be missing |
 
-At least 120 months, six assets recommended. Default frozen dates: 2010–2018 training, 2019–2021 validation, 2022–2025 test. The loader permits earlier training data; filter to 2010 onward for the stated default. Change dates only before inspecting the test outcomes and document the reason. No forward-fill of prices across missing return periods and no missing returns replaced by zero.
+Confirm field availability and timing against the official schema before making competition-equivalence claims. The web data page did not expose readable schema during preparation. Unexpected schema is a blocker to resolve, not a reason to rename unrelated columns.
 
-Only synthetic data is in the starter. The live downloader and WRDS entitlements must be checked by the team. Source licenses determine whether raw data or derived exports can leave the institution; a private GitHub repo is not automatically an approved data store.
+The ordered distinct dates split 60% train, 20% validation, 20% withheld test; exact IDs are written to the run manifest. This initial subset is educational and does not reproduce the official competition evaluation API. Audit target horizon and any boundary purge at Saturday's methods review before research conclusions.
+
+## What may be committed
+
+Code, selection recipes, source URLs and permitted aggregate summaries. Local raw/processed/demo data and generated outputs are ignored. Do not commit Kaggle credentials, row-level predictions, raw CSV/Parquet, or executed real-data notebook outputs. A private GitHub repo does not automatically satisfy data terms.
+
+If access remains blocked, use `--demo` for mechanics and report the limitation. A switch to genuine-return research is a mentor scope decision; archived acquisition helpers live under `legacy/portfolio/scripts/`.

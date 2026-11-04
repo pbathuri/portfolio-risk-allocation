@@ -1,6 +1,6 @@
 # DSC Fintech: Adaptive Market Forecasting & Risk Monitor
 
-Status: selected four-week project direction for `pbathuri/portfolio-risk-allocation`. Implementation is team work planned below; no new model results are claimed. Updated November 3, 2026.
+Status: selected four-week project direction for `pbathuri/portfolio-risk-allocation`. A synthetic-tested acquisition/feature/baseline starter is implemented. Real-data research, covariance monitoring and the dashboard remain team work; no market results are claimed. Updated November 3, 2026.
 
 ## Decision
 
@@ -24,7 +24,7 @@ The AI component is the fitted predictive model. A chatbot is unnecessary. The d
 
 Budget assumption: 6–8 hours per student per week, including the Saturday meeting; 48–64 combined hours. CPU-first. Start with at most 500,000 rows, a small training-selected symbol universe, and at most 10 features for covariance monitoring. Read selected Parquet columns/partitions instead of loading the full dataset. Freeze the actual row count, chronological boundaries, symbols, columns, and file hashes after profiling. Preserve complete selected date/symbol groups; do not randomly sample individual rows across time.
 
-Keep the existing Python data-analysis stack where possible. The starter already includes scikit-learn. Proposed additions for implementation are a Parquet reader and `precise`, with exact versions recorded after an installation smoke test. No dependencies are installed by this proposal. Use the existing Tableau/Power BI export workflow if present; an extra web framework is optional only after the analysis works.
+Keep the existing Python data-analysis stack where possible. The starter already includes scikit-learn. Proposed additions for implementation are a Parquet reader and `precise`, with exact versions recorded after an installation smoke test. The default CSV checkpoint uses the existing dependencies; Parquet input uses an already-available pyarrow environment. No new required dependencies were added. Use the existing Tableau/Power BI export workflow if present; an extra web framework is optional only after the analysis works.
 
 Cut first: neural networks, hyperparameter sweeps, LLM summaries, automated trading, full-dataset training, and cloud deployment. If Kaggle access fails, use the starter's documented public-return source and recast the question as adaptive portfolio risk; label it Jane Street-inspired, not a Jane Street-data study. Synthetic data remains a plumbing test only.
 

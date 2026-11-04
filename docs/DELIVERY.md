@@ -1,5 +1,7 @@
 # Dashboard and resume evidence
 
+First checkpoint: [BEFORE_SATURDAY.md](BEFORE_SATURDAY.md). Saturday requires the data/feature/baseline note, not the finished dashboard below.
+
 ## Three dashboard pages
 
 1. **Forecast benchmark:** dataset identity, train/validation/test dates, zero/mean/ridge scores, daily error, selected symbol and sample counts. Mark test results unavailable until the final evaluation.

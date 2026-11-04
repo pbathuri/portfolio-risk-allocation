@@ -16,3 +16,15 @@ logs/
 !data/processed/.gitkeep
 !data/demo/.gitkeep
 !outputs/.gitkeep
+# Isolated legacy exercises and data credentials
+legacy/portfolio/data/raw/*
+legacy/portfolio/data/processed/*
+legacy/portfolio/data/demo/*
+legacy/portfolio/outputs/*
+!legacy/portfolio/data/raw/.gitkeep
+!legacy/portfolio/data/processed/.gitkeep
+!legacy/portfolio/data/demo/.gitkeep
+!legacy/portfolio/outputs/.gitkeep
+kaggle.json
+.kaggle/
+*.parquet

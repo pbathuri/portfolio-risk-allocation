@@ -1,7 +1,7 @@
-name: demo
+name: forecasting-checkpoint
 on: [push, pull_request]
 jobs:
-  demo:
+  checkpoint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -10,6 +10,10 @@ jobs:
           python-version: '3.11'
           cache: pip
       - run: pip install -r requirements.txt
+      - run: python -m compileall -q src scripts tests
       - run: python -m unittest discover -s tests
-      - run: python scripts/run_demo.py
+      - run: python scripts/run_forecasting.py --demo
       - run: python scripts/execute_notebooks.py
+      - name: Retained portfolio exercise regression tests
+        working-directory: legacy/portfolio
+        run: python -m unittest discover -s tests

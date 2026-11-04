@@ -1,3 +1,5 @@
+> Implemented checkpoint: fixed ridge alpha=1, ten raw inputs, missingness indicators and three causal feature lags, train/validation only. See [FEATURES.md](FEATURES.md). Tuning, the Cotton monitor, uncertainty and final evaluation below are future team work.
+
 # Experiment contract
 
 ## Freeze before testing

@@ -5,9 +5,9 @@ This preserves the goals in the [original DSC learning map](archive/five-week-pl
 
 | Existing goal | Four-week evidence |
 |---|---|
-| Acquire and clean financial data | Week 1 data register, missingness decisions, permitted-use note |
+| Acquire and clean financial data | Pre-Saturday checkpoint and Week 1 data register, missingness decisions, permitted-use note |
 | Understand portfolio statistics | Week 2 two-asset variance hand calculation on actual-return or labeled synthetic exercise; explain feature covariance separately |
-| Compare asset allocation methods | Week 2 bounded existing exercise comparing the three allocation baselines; distinguish allocation from supervised prediction |
+| Compare asset allocation methods | Week 2 bounded archived exercise in `legacy/portfolio/` comparing the three allocation baselines; distinguish allocation from supervised prediction |
 | Evaluate and visualize risk-return trade-offs | Weeks 3–4 retain the allocation exercise and its risk-return plot; main dashboard evaluates forecast error and drift without calling responders returns |
 | Communicate decision support responsibly | Week 4 report, limitations, reproducible demo and individual explanation |
 

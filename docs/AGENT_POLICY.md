@@ -4,7 +4,7 @@ The student is the author of the decision and the reviewer of every line merged.
 
 Allowed: ask for an explanation, propose a small function, draft a unit test, or diagnose an error using a minimal non-sensitive example. Before asking, write the expected input/output and one failure case yourself.
 
-Do not delegate a whole analysis, invent results/citations, let an agent alter the cohort or metric definitions, or grant it production credentials. Do not send WRDS extracts, access tokens or patient-level data to an external assistant without explicit institutional permission. Public access does not automatically authorize uploading a dataset to another service.
+Do not delegate a whole analysis, invent results/citations, let an agent alter the cohort or metric definitions, or grant it production credentials. Do not send restricted competition data or access tokens to an external assistant without explicit institutional permission. Public access does not automatically authorize uploading a dataset to another service.
 
 For each meaningful assisted change:
 1. Open an issue with the question and acceptance criterion.
@@ -15,4 +15,4 @@ For each meaningful assisted change:
 
 An agent cannot approve its own patch, change access rights, publish data, create cluster allocations or decide statistical exclusions. The executive mentor signs off on method changes. A second student checks conclusions against computed results.
 
-Prompt example: “Implement only the weighted eFG calculation from this public toy table. Do not alter metric definitions. Return a small diff and one zero-attempt test.”
+Prompt example: “Implement only weighted zero-mean R² for this synthetic table. Do not alter the split or feature definitions. Return a small diff and a zero-denominator test.”

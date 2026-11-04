@@ -1,4 +1,6 @@
 issue_id,week,owner,reviewer,task,dependency,acceptance_evidence
+PRE-A,0,A,B,Prepare bounded source slice and acquisition/QA checkpoint,Before Saturday Nov 7 10am,Source hash; selection recipe; access status and QA note
+PRE-B,0,B,A,Explain features and record initial validation baselines,PRE-A or labeled demo,Three-row lag check; baseline table; proposed ablation; cross-review
 W1-A,1,A,B,Verify Kaggle access; build bounded loader and data manifest,Kickoff,"Schema, hashes, selected groups and missingness documented"
 W1-B,1,B,A,Freeze chronological splits; hand-check metric and sketch dashboard,Kickoff,No split overlap; explicit date IDs; metric edge cases specified
 W2-A,2,A,B,"Compare zero, mean and ridge on validation; complete allocation exercise",Week 1 gate,Same rows and weights; three allocation rules explained
