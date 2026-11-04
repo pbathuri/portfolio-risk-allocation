@@ -8,9 +8,9 @@ A owns data and predictive modeling; B owns covariance monitoring and dashboard 
 
 | Week / review | A delivers | B delivers | Acceptance gate |
 |---|---|---|---|
-| 1: Nov 7–13 / Nov 14 | Review prepared slice; resolve schema/timing and run first feature ablation | Review starter splits/tests; freeze purge policy and monitor experiment | Confirmed real-data contract or fallback decision; reproduction and causal split evidence |
-| 2: Nov 14–20 / Nov 21 | Zero/mean/ridge comparisons on validation | `precise` smoke test and static-vs-online covariance comparison | Reproducible validation table; causal update test; portfolio-statistics hand exercise |
-| 3: Nov 21–27 / Nov 28 | Error breakdowns, small tuning log, frozen model | Three dashboard pages linked to real computed outputs | Peer walkthrough, frozen configuration, limitations draft; test remains unopened |
+| 1: Nov 7–13 / Nov 14 | Review prepared CSV; resolve schema/timing and run first feature ablation | Review starter splits/tests; review lag/window boundaries and monitor experiment | Confirmed real-data contract or fallback decision; reproduction and causal split evidence |
+| 2: Nov 14–20 / Nov 21 | Zero/mean/persistence/ridge comparisons on validation | `precise` smoke test and static-vs-online covariance comparison | Reproducible validation table; causal update test; portfolio-statistics hand exercise |
+| 3: Nov 21–27 / Nov 28 | Error breakdowns, small tuning log, frozen model | Three dashboard pages linked to real computed outputs | Peer walkthrough, frozen configuration, limitations draft; test remains unscored |
 | 4: Nov 28–Dec 4 / Dec 5 | One final test evaluation, paired uncertainty analysis | Clean-environment reproduction, dashboard and demonstration | Both reproduce; report and run manifest agree; no invented results |
 
 Plan Week 3 as a lighter holiday week: no new model families or infrastructure. If work slips, reduce dashboard polish and retain the benchmark, monitor, leakage tests and report.

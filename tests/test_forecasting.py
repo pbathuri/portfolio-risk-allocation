@@ -1,159 +1,126 @@
 from pathlib import Path
-import json
-import io
 from contextlib import redirect_stdout
+import io
 import sys
+import json
 import tempfile
-import subprocess
 import unittest
+from unittest.mock import patch,Mock
+import subprocess
 import numpy as np
 import pandas as pd
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from forecasting import checkpoint, engineer, synthetic, validate, split_dates, weighted_metrics
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src'))
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+from forecasting import validate,engineer,synthetic,split_dates,checkpoint,weighted_metrics
 from prepare_forecasting import prepare
-from inspect_source import inspect
+from fetch_data import fetch
 
 
 class ForecastingTests(unittest.TestCase):
-    def test_weighted_metric_hand_calculation(self):
-        result = weighted_metrics([1, 2], [0, 1], [1, 3])
-        self.assertAlmostEqual(result['weighted_rmse'], 1)
-        self.assertAlmostEqual(result['weighted_zero_mean_r2'], 1 - 4/13)
+    def test_metric_hand_calculation(self):
+        m=weighted_metrics([1,2],[0,1],[1,3])
+        self.assertAlmostEqual(m['weighted_rmse'],1)
+        self.assertAlmostEqual(m['weighted_zero_mean_r2'],1-4/13)
 
-    def test_zero_denominator_is_undefined(self):
-        self.assertIsNone(weighted_metrics([0], [1], [1])['weighted_zero_mean_r2'])
+    def test_undefined_r2(self):
+        self.assertIsNone(weighted_metrics([0],[1],[1])['weighted_zero_mean_r2'])
 
-    def test_invalid_weights_rejected(self):
-        for weights in ([0, 0], [-1, 2], [np.nan, 1]):
-            with self.subTest(weights=weights), self.assertRaises(ValueError):
-                weighted_metrics([1, 2], [1, 2], weights)
+    def test_invalid_weights(self):
+        for w in [[0,0],[-1,2],[np.nan,1]]:
+            with self.subTest(w=w),self.assertRaises(ValueError):
+                weighted_metrics([1,2],[1,2],w)
 
-    def test_duplicate_keys_rejected(self):
-        data = synthetic()
-        with self.assertRaisesRegex(ValueError, 'Duplicate'):
-            validate(pd.concat([data, data.iloc[:1]]))
+    def test_duplicate_date_rejected(self):
+        data=synthetic()
+        with self.assertRaisesRegex(ValueError,'Duplicate'):
+            validate(pd.concat([data,data.iloc[:1]]))
 
-    def test_whole_dates_are_strictly_separated(self):
-        data = validate(synthetic())
-        masks = split_dates(data)
-        self.assertLess(data.loc[masks['train'], 'date_id'].max(), data.loc[masks['validation'], 'date_id'].min())
-        self.assertLess(data.loc[masks['validation'], 'date_id'].max(), data.loc[masks['test'], 'date_id'].min())
-        self.assertTrue((sum(m.astype(int) for m in masks.values()) == 1).all())
+    def test_source_date_format(self):
+        data=synthetic()
+        data.date=pd.to_datetime(data.date).dt.strftime('%d-%b-%y')
+        self.assertEqual(validate(data).date.iloc[0],pd.Timestamp('2020-01-01'))
 
-    def test_lag_resets_for_each_symbol_and_day(self):
-        data = validate(synthetic())
-        x = engineer(data)
-        first = data.groupby(['date_id', 'symbol_id']).head(1).index
-        self.assertTrue(x.loc[first, 'feature_00_lag1'].isna().all())
-        row = data.index[(data.date_id == 0) & (data.time_id == 1) & (data.symbol_id == 0)][0]
-        self.assertEqual(x.loc[row, 'feature_00_lag1'], data.loc[0, 'feature_00'])
+    def test_lags_and_rolling_end_two_rows_back(self):
+        data=synthetic();data.SP=np.arange(len(data),dtype=float)
+        x=engineer(data)
+        self.assertEqual(x.loc[21,'SP_lag2'],19)
+        self.assertEqual(x.loc[21,'SP_mean20_lag2'],9.5)
+        self.assertAlmostEqual(x.loc[21,'SP_std20_lag2'],np.std(np.arange(20),ddof=1))
 
-    def test_future_feature_changes_do_not_change_past_features(self):
-        data = synthetic()
-        changed = data.copy()
-        changed.loc[changed.date_id > 10, 'feature_00'] = 1e9
-        pd.testing.assert_frame_equal(engineer(data).loc[data.date_id <= 10], engineer(changed).loc[data.date_id <= 10])
+    def test_current_and_future_values_do_not_change_current_features(self):
+        data=synthetic(); changed=data.copy()
+        changed.loc[39:,'SP']=999
+        pd.testing.assert_frame_equal(engineer(data).loc[:40],engineer(changed).loc[:40])
 
-    def test_missing_flags_are_explicit(self):
-        data = synthetic()
-        data.loc[0, 'feature_00'] = np.nan
-        self.assertEqual(engineer(data).loc[0, 'feature_00_missing'], 1.)
+    def test_missingness_flag_tracks_lagged_input(self):
+        data=synthetic();data.loc[30,'DAX']=np.nan
+        self.assertEqual(engineer(data).loc[32,'DAX_lag2_missing'],1)
 
-    def test_test_labels_are_never_used_or_exported(self):
-        data = synthetic()
-        changed = data.copy()
-        changed.loc[changed.date_id >= 24, 'responder_6'] = np.nan
+    def test_warmup_and_splits_do_not_overlap(self):
+        data=validate(synthetic());m=split_dates(data)
+        self.assertFalse(sum(m.values())[:21].any())
+        self.assertTrue((sum(m.values())[21:]==1).all())
+        self.assertLess(data.loc[m['train'],'date'].max(),data.loc[m['validation'],'date'].min())
+        self.assertLess(data.loc[m['validation'],'date'].max(),data.loc[m['test'],'date'].min())
+
+    def test_test_targets_not_used_or_exported(self):
+        data=synthetic();changed=data.copy();changed.loc[split_dates(data)['test'],'SP']=np.nan
         with tempfile.TemporaryDirectory() as tmp:
-            a, b = Path(tmp)/'a', Path(tmp)/'b'
-            m1, _ = checkpoint(data, a, 'demo')
-            m2, _ = checkpoint(changed, b, 'demo')
-            pd.testing.assert_frame_equal(m1, m2)
-            self.assertEqual((a/'predictions.csv').read_bytes(), (b/'predictions.csv').read_bytes())
-            predictions = pd.read_csv(a/'predictions.csv')
-            self.assertLess(predictions.date_id.max(), 24)
-            self.assertNotIn('responder_6', predictions)
+            a,b=Path(tmp)/'a',Path(tmp)/'b'
+            m1,manifest=checkpoint(data,a,'demo');m2,_=checkpoint(changed,b,'demo')
+            pd.testing.assert_frame_equal(m1,m2)
+            self.assertEqual((a/'predictions.csv').read_bytes(),(b/'predictions.csv').read_bytes())
+            self.assertEqual(manifest['test_status'],'withheld; not scored')
+            self.assertEqual(set(pd.read_csv(a/'predictions.csv').split),{'train','validation'})
 
-    def test_validation_values_do_not_change_training_model(self):
-        data = synthetic()
-        changed = data.copy()
-        changed.loc[changed.date_id >= 18, 'feature_00'] = 1e6
-        changed.loc[changed.date_id >= 18, 'responder_6'] = -1e6
+    def test_validation_does_not_change_training_fit(self):
+        data=synthetic();changed=data.copy();changed.loc[~split_dates(data)['train'] & (np.arange(len(data))>=21),'SP']=999
         with tempfile.TemporaryDirectory() as tmp:
-            a, b = Path(tmp)/'a', Path(tmp)/'b'
-            checkpoint(data, a, 'demo')
-            checkpoint(changed, b, 'demo')
-            p1, p2 = pd.read_csv(a/'predictions.csv'), pd.read_csv(b/'predictions.csv')
-            pd.testing.assert_frame_equal(p1[p1.split == 'train'], p2[p2.split == 'train'])
+            a,b=Path(tmp)/'a',Path(tmp)/'b'
+            m1,_=checkpoint(data,a,'demo');m2,_=checkpoint(changed,b,'demo')
+            pd.testing.assert_frame_equal(m1[m1.split=='train'],m2[m2.split=='train'])
 
-    def test_all_missing_training_column_is_dropped(self):
-        data = synthetic()
-        data.loc[data.date_id < 18, 'feature_00'] = np.nan
+    def test_all_missing_training_feature_dropped(self):
+        data=synthetic();data['DAX']=np.nan
         with tempfile.TemporaryDirectory() as tmp:
-            _, manifest = checkpoint(data, tmp, 'demo')
-            self.assertNotIn('feature_00', manifest['features'])
-            self.assertIn('feature_00_missing', manifest['features'])
+            _,m=checkpoint(data,tmp,'demo')
+            self.assertNotIn('DAX_lag2',m['features'])
 
-    def test_demo_real_output_collision_rejected(self):
+    def test_mode_collision_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
-            checkpoint(synthetic(), tmp, 'demo')
-            with self.assertRaisesRegex(ValueError, 'mix'):
-                checkpoint(synthetic(), tmp, 'real')
+            checkpoint(synthetic(),tmp,'demo')
+            with self.assertRaisesRegex(ValueError,'mix'):
+                checkpoint(synthetic(),tmp,'real')
 
-    def test_prepare_retains_complete_selected_groups(self):
+    def test_preparation_preserves_returns(self):
         with tempfile.TemporaryDirectory() as tmp:
-            source, out = Path(tmp)/'raw.csv', Path(tmp)/'slice.csv'
-            synthetic().to_csv(source, index=False)
-            manifest = prepare(source, out, 0, 19, [0, 1])
-            self.assertEqual(manifest['rows'], 20*12*2)
-            self.assertEqual(pd.read_csv(out).groupby(['date_id','symbol_id']).size().unique().tolist(), [12])
-            self.assertEqual(len(json.loads(out.with_suffix('.manifest.json').read_text())['output_sha256']), 64)
+            src,out=Path(tmp)/'raw.csv',Path(tmp)/'prepared.csv'
+            data=synthetic();data.to_csv(src,index=False);m=prepare(src,out)
+            self.assertEqual(m['rows'],len(data))
+            np.testing.assert_allclose(pd.read_csv(out).SP,data.SP)
+            self.assertEqual(len(m['source_sha256']),64)
 
-    def test_row_cap_fails_without_partial_output(self):
+    def test_changed_prepared_file_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
-            source, out = Path(tmp)/'raw.csv', Path(tmp)/'slice.csv'
-            synthetic().to_csv(source, index=False)
-            with self.assertRaisesRegex(ValueError, 'row cap'):
-                prepare(source, out, 0, 29, [0, 1, 2], 20)
-            self.assertFalse(out.exists())
+            src,out=Path(tmp)/'raw.csv',Path(tmp)/'prepared.csv'
+            synthetic().to_csv(src,index=False);prepare(src,out)
+            with out.open('a') as f:f.write('\n')
+            r=subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'scripts/run_forecasting.py'),'--input',str(out),'--output',str(Path(tmp)/'result')],capture_output=True,text=True)
+            self.assertNotEqual(r.returncode,0)
+            self.assertIn('changed since its manifest',r.stderr)
 
-    def test_source_inspection_reports_schema_and_identifiers(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            source = Path(tmp)/'source.csv'
-            synthetic().to_csv(source, index=False)
-            buffer = io.StringIO()
-            with redirect_stdout(buffer):
-                inspect(source)
-            metadata = json.loads(buffer.getvalue().split('Counts per date/symbol')[0])
-            self.assertEqual(metadata['rows'], 1080)
-            self.assertEqual(metadata['symbols'], [0, 1, 2])
-            self.assertEqual(len(metadata['dates']), 30)
+    def test_download_validates_before_writing(self):
+        response=Mock();response.content=b'<html>not a csv</html>'
+        with tempfile.TemporaryDirectory() as tmp,patch('fetch_data.requests.get',return_value=response):
+            path=Path(tmp)/'source.csv'
+            with self.assertRaises(ValueError):fetch(path)
+            self.assertFalse(path.exists())
 
-    def test_cli_rejects_slice_changed_after_manifest(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            source, prepared = Path(tmp)/'raw.csv', Path(tmp)/'slice.csv'
-            synthetic().to_csv(source, index=False)
-            prepare(source, prepared, 0, 29, [0, 1])
-            with prepared.open('a') as handle:
-                handle.write('\n')
-            command = [sys.executable, str(Path(__file__).resolve().parents[1]/'scripts/run_forecasting.py'),
-                       '--input', str(prepared), '--output', str(Path(tmp)/'out')]
-            result = subprocess.run(command, capture_output=True, text=True)
-            self.assertNotEqual(result.returncode, 0)
-            self.assertIn('changed since its manifest', result.stderr)
-            self.assertFalse((Path(tmp)/'out').exists())
-
-    def test_parquet_selection_matches_csv(self):
-        try:
-            import pyarrow  # noqa: F401
-        except ImportError:
-            self.skipTest('Optional Parquet engine not installed')
-        with tempfile.TemporaryDirectory() as tmp:
-            source, out = Path(tmp)/'raw.parquet', Path(tmp)/'slice.csv'
-            synthetic().to_parquet(source)
-            manifest = prepare(source, out, 0, 19, [0, 1])
-            self.assertEqual(manifest['rows'], 480)
+    def test_download_saves_valid_source_bytes(self):
+        response=Mock();response.content=synthetic().to_csv(index=False).encode()
+        with tempfile.TemporaryDirectory() as tmp,patch('fetch_data.requests.get',return_value=response),redirect_stdout(io.StringIO()):
+            path=Path(tmp)/'source.csv';fetch(path)
+            self.assertEqual(path.read_bytes(),response.content)
 
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__=='__main__':unittest.main()

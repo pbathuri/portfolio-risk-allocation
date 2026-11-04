@@ -1,17 +1,16 @@
-# Feature engineering checkpoint
+# Feature engineering
 
-All transformations are in `src/forecasting.py`; read them before changing them.
+Predict the published SP return for observation t using information ending at t−2. All transformations are in `src/forecasting.py`.
 
-| Feature family | Implemented definition | Why / limitation |
+| Family | Definition | Reason / limitation |
 |---|---|---|
-| Raw inputs | `feature_00` through `feature_09` at the current row | Small fixed initial set; anonymized semantics; not selected for predictive importance |
-| Missingness flags | 1 when each raw input is NaN, otherwise 0 | Explicit missingness signal; missingness may shift over time |
-| Three lags | Previous observed value of features 00, 01 and 02 within the same symbol and date | Causal feature-only memory; missing at each day's first observation; elapsed time need not be constant |
-| Imputation | Median computed from training rows only | No future fill; all-missing training columns are dropped and cataloged |
-| Scaling | Mean and scale fit on imputed training rows only | Validation and test never fit preprocessing |
+| Nine return lags | Each published return series shifted by two observed rows | Avoid current-row and same-day international close relationships; observations are not calendar days |
+| Four SP rolling statistics | Mean and sample standard deviation over 5 and 20 observations, ending at t−2 | Simple return/risk history; fixed windows, not selected using validation scores |
+| Missingness flags | One flag per engineered input | Explicit absent information; no missing inputs in this actual development run |
+| Imputation/scaling | Medians, means and scales fit on training only | All-missing training inputs dropped; no future fill |
 
-No responder column, target lag, future value or random train/test split is allowed. The lag is **not** yesterday's label or the immediately preceding global row. Sorting uses date, time and symbol; duplicate keys fail.
+Fixed warm-up is 21 rows: at t=21 the 20-observation window ending at t−2 covers rows 0–19. Remaining 515 observations split 309/103/103 into train/validation/withheld test.
 
-For one symbol with feature values `2, NaN, 5` at successive times within a day, the lag is `NaN, 2, NaN`; missingness flags are `0, 1, 0`. Imputation is performed later using training-only medians. At the next day the lag resets to NaN. Explain this example at Saturday's meeting.
+Hand check: for SP values 0,1,2,..., at row 21 the lag is 19, the 20-row mean is 9.5 and sample standard deviation uses ddof=1. Changing rows 20 onward cannot alter row 21's predictors.
 
-The default ridge uses alpha=1, fixed for the checkpoint. Proposed follow-up: compare raw-only versus raw+missingness versus raw+missingness+lags on the same validation rows. Freeze the hypothesis before running it, record every variant and do not use the final test to select features.
+Do not create same-day cross-market features or select features against the final test. Future student ablation: compare lag-only inputs with lags plus rolling statistics on identical validation rows. Missingness flags are an engineering safeguard, not evidence of a useful signal here.

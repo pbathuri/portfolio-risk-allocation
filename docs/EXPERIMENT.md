@@ -1,38 +1,25 @@
-> Implemented checkpoint: fixed ridge alpha=1, ten raw inputs, missingness indicators and three causal feature lags, train/validation only. See [FEATURES.md](FEATURES.md). Tuning, the Cotton monitor, uncertainty and final evaluation below are future team work.
-
 # Experiment contract
 
-## Freeze before testing
+## Frozen checkpoint
 
-Record the dataset version/hash, row filters, feature list, target, weight field, missing-value policy, split boundaries, seed, dependency versions and machine. Sort by date/time and symbol. All symbols at a timestamp belong to the same chronological partition. Use the first 60% of distinct dates for training, next 20% for validation and final 20% for testing; replace percentages with explicit date IDs in the frozen configuration. If label horizons overlap a boundary, purge that overlap using the documented horizon.
+Source, attribution and normalization: DATA.md. Features: FEATURES.md. Download hash and observed results: REAL_DATA_VERIFICATION.md. Fixed target SP, two-observation predictor delay, 21-row warm-up, chronological 60/20/20 split and ridge alpha=1 were set before real scoring. Record every later change and its reason.
 
-Fit imputation/scaling on training only; add missingness indicators where useful. Never backfill from the future. Exclude all responder columns from predictors in the MVP. Do not use lagged labels unless their availability is explicitly verified and tested. Predict from allowed current features; log predictions before labels are read. Evaluate historical labels offline, without using them to update the predictor during the test.
+The 309 training observations fit preprocessing and models; 103 validation observations support choices. The final 103 observations are withheld. Do not use test outcomes for exploratory feature selection. The starter's tests verify lag/window causality, training isolation, metric edge cases, duplicate-date handling and input hashes.
 
-## Models and scores
+## Week 1 feature hypothesis
 
-Compare zero, training weighted-mean and ridge regression. Tune ridge regularization using only three predeclared values on validation; no test-driven feature selection. Use identical rows and weights for every comparison.
+Compare return-lag-only ridge with the existing lags plus rolling-statistics ridge on identical validation rows. Choose the comparison before running it. Keep alpha=1 for this ablation; extra tuning is optional only if time permits and logged as validation-driven. Report every variant, not only the winner.
 
-Proposed primary metric is weighted zero-mean R²: `1 - sum(w * (y - prediction)^2) / sum(w * y^2)`. Verify it against the competition evaluation page before freezing. Do not substitute centered R². Reject negative/nonfinite weights and nonfinite predictions; zero total weight or zero denominator yields an explicitly undefined score, not zero. Also show weighted RMSE, per-day results, row counts and missingness. Report pooled scores from summed numerators and denominators, not an average of daily R² values.
+## Cotton-library experiment (Week 2)
 
-## Cotton-library monitoring experiment
+Implement one `precise` exponentially weighted covariance estimator on the nine return series, with a fixed rate selected on development data. Compare with static training covariance. Use covariance state based only on observations available before the scored vector; score first, update second. For same-target-date cross-market safety, use vectors delayed two observed rows in the forecasting monitor. Record the exact library version, warm-up and handling of missing/singular matrices.
 
-Use the same fixed, training-standardized feature vectors for a static training covariance and one `precise` exponentially weighted covariance estimator. Select features using training missingness and variance, never held-out performance. Record deterministic handling of simultaneous rows; prefer one feature-mean vector per timestamp across the frozen symbols to avoid arbitrary symbol-order updates. This measures covariance of aggregate feature observations, not asset-return covariance.
+Show covariance/correlation drift and an equal-weight basket variance estimate. A basket risk diagnostic is not a traded portfolio return. If comparing variance forecasts to realized squared basket returns, align the dates and state the noisy-proxy limitation. Do not claim shift-detection accuracy without ground-truth labels or prediction improvement from an unrelated covariance chart.
 
-Score each new vector against the preceding monitor state, then update with that vector. Regularize covariance before inversion; log warm-up, singularity and insufficient-observation cases. Choose a single forgetting rate and alert percentile on validation, then freeze them. Compare covariance drift and alert frequency, and examine subsequent error descriptively. Without known shift labels, do not claim detection accuracy or a calibrated false-positive rate. Monitoring is not a trading signal.
+## Weeks 3–4
 
-If testing an alert-based abstention rule, define it before unlocking test labels and compare coverage as well as error. Otherwise leave abstention out of the MVP.
+Freeze the feature/model/monitor choices before final evaluation. Report RMSE and zero-mean R² with identical rows across methods. Use paired contiguous-observation block resampling of error differences, with 200 resamples and a predeclared block length; show sensitivity and acknowledge the short test period. The source calendar is irregular, so describe blocks as observations, not uniform days.
 
-## Leakage and uncertainty checks
+The current runner intentionally has no final-test flag. Implement that evaluation only after the team records its freeze and peer review. A bug correction requires a disclosed rerun, not hidden retuning. Final outputs must distinguish training estimates, validation choices and one final test evaluation.
 
-- Changing future rows must not change earlier predictions or monitor scores.
-- Changing held-out labels must not change preprocessing, model fitting or alerts.
-- Train/validation/test timestamps must not overlap; no duplicate keys.
-- Hand-check weighted R² and RMSE on a tiny table, including zero-weight and constant-zero-target cases.
-- Check covariance dimensions, symmetry, finite values and update ordering.
-- Bootstrap paired model error differences in contiguous day blocks, not independent rows; use 200 resamples and state the chosen block length and sensitivity. Interpret intervals cautiously when the test slice has few days.
-
-Freeze after Week 3 and open the test partition once in Week 4. Corrections after a discovered bug require a versioned rerun and disclosure; they do not justify retuning on test outcomes.
-
-## Keep portfolio learning honest
-
-Use the existing return-data exercise to hand-check two-asset variance and compare equal weight, inverse volatility and minimum variance. Retain it as a bounded learning exercise separate from the forecasting benchmark. Anonymous responder values and input-feature covariances are not tradable returns: do not compute portfolio Sharpe, P&L or dollar risk from them. If the fallback becomes the main project, use documented genuine return units and the starter's cost/rebalancing conventions.
+Retain the two-asset variance and three allocation-baseline exercise separately. No execution prices, costs, dividends or precise trading availability are established for the forecast project; no P&L or profitable-alpha claims.

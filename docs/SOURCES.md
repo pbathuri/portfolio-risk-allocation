@@ -1,7 +1,8 @@
-# Current project sources
+# Sources and attribution
 
-- [Jane Street competition overview](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/overview), [data](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/data) and [rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules): historical public benchmark; inspect schema, timing and access terms with your account.
-- [Kaggle official CLI](https://github.com/Kaggle/kaggle-cli) and [competition commands](https://github.com/Kaggle/kaggle-cli/blob/main/docs/competitions.md): list files and download a named file. No whole-dataset download is required.
-- [Peter Cotton](https://github.com/microprediction), [precise](https://github.com/microprediction/precise), [timemachines](https://github.com/microprediction/timemachines), [skaters](https://github.com/microprediction/skaters): primary sources for library capabilities, not evidence of widespread institutional adoption.
+- [UCI Istanbul Stock Exchange](https://archive.ics.uci.edu/dataset/247/istanbul+stock+exchange), [DOI](https://doi.org/10.24432/C54P4J), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/): selected data and reuse terms. Credit Oguz Akbilgic (2013); describe date normalization and derived features.
+- [Official UCI metadata](https://archive.ics.uci.edu/api/dataset?id=247) and [CSV](https://archive.ics.uci.edu/static/public/247/data.csv): verified acquisition endpoints, no account required.
+- [Peter Cotton](https://github.com/microprediction) and [precise](https://github.com/microprediction/precise): selected online covariance work; no claim of broad institutional adoption or endorsement.
+- [Jane Street competition overview](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/overview): methodological motivation only. [Rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules) restrict competition data use; that dataset is not part of this project.
 
-Reviewed November 3, 2026. Detailed attribution limits are in [PROJECT_PROPOSAL.md](PROJECT_PROPOSAL.md). No specific LinkedIn post was supplied. Real competition access, exact schema and label timing still require the team's verification. Old portfolio acquisition helpers are isolated in `legacy/portfolio/`.
+Sources checked November 3, 2026. No specific LinkedIn post was supplied. `timemachines` and `skaters` are background reading, not required integrations. Source facts and experimental findings must be distinguished in the final report.

@@ -1,3 +1,4 @@
 date,student,tool_model,task,files,validation,reviewer
 2026-11-03,Organizer-directed,Codex,Rescope confirmed repository to four weeks and two students,README.md; docs planning files,Documentation checks; starter checks recorded in update report,Pending team review
 2026-11-03,Organizer-directed,Codex,Implement forecasting preparation checkpoint and isolate old allocation workflow,src/forecasting.py; scripts; tests; notebooks; docs; legacy; CI,Synthetic unit/integration and notebook checks; see VALIDATION.md,Pending student cross-review
+2026-11-03,Organizer-directed,Codex,Replace restricted competition source with licensed UCI data; verify actual download and baseline pipeline,src; scripts; tests; notebooks; docs,Official CSV download; real validation scores; causality tests and notebook checks,Pending student reproduction
