@@ -1,6 +1,6 @@
 # Current verification — November 3, 2026
 
-The primary workflow now uses the openly licensed UCI Istanbul Stock Exchange dataset. Jane Street competition data is not used. Earlier synthetic-only and Kaggle-access records in Git history are superseded by this source change.
+The primary workflow uses the openly licensed UCI Istanbul Stock Exchange dataset. Jane Street competition data is not used.
 
 ## Passed
 

@@ -1,10 +1,10 @@
 # Before Saturday: reproduce a real-data checkpoint
 
-**Due:** Saturday November 7, 2026, 10 a.m. America/Indiana/Indianapolis. **Budget:** 2–3 hours each, counted toward Week 1. Claim A/B in Teams. The source is now UCI's openly licensed international-return dataset; no Kaggle login is needed.
+**Due:** Saturday November 7, 2026, 10 a.m. America/Indiana/Indianapolis. **Budget:** 2–3 hours each, counted toward Week 1. Claim A/B in Teams. The source is UCI's openly licensed international-return dataset; no Kaggle login is needed.
 
 ## Both — setup (20–30 minutes)
 
-Pull the repo, follow README environment setup, run `python scripts/run_forecasting.py --demo` and `python -m unittest discover -s tests`. Read DATA.md and FEATURES.md. The maintainer has verified the real path; your task is to reproduce and explain it.
+Pull the repo, follow README environment setup, run `python scripts/run_forecasting.py --demo` and `python -m unittest discover -s tests`. Read DATA.md and FEATURES.md. Use REAL_DATA_VERIFICATION.md to check your results.
 
 ## A — data and provenance (60–90 minutes)
 

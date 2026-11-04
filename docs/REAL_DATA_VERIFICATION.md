@@ -1,6 +1,6 @@
 # Real-data verification — November 3, 2026
 
-**Result: official download → preparation → features → baseline validation completed successfully.** This is a forecast-evaluation checkpoint, not a trading P&L backtest or a completed dashboard.
+The data download, preparation, feature calculations and baseline evaluation completed successfully. Results below measure forecast error; they do not measure trading profit.
 
 ## Source and reproduction
 

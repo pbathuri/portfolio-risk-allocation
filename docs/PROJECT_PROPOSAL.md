@@ -4,7 +4,7 @@ Two students, four weeks, 6–8 hours per person per week. Combine the two equal
 
 **Question:** Can lagged international market returns improve prediction of the published SP series, and does an online covariance monitor describe changing risk structure better than a static estimate?
 
-Use [UCI dataset 247](https://archive.ics.uci.edu/dataset/247/istanbul+stock+exchange), listed under CC BY 4.0, with attribution in DATA.md. It is a small historical benchmark; research credibility comes from reproducibility, causal evaluation and clear limitations, not size or profitable claims. The organizer approved this replacement after the Jane Street competition-use restriction was confirmed. Do not describe this as a Jane Street-data project.
+Use [UCI dataset 247](https://archive.ics.uci.edu/dataset/247/istanbul+stock+exchange), listed under CC BY 4.0, with attribution in DATA.md. It is a small historical benchmark; research credibility comes from reproducibility, causal evaluation and clear limitations, not size or profitable claims. Jane Street provides methodological context; the analysis uses UCI data.
 
 Jane Street inspiration: time-ordered evaluation, non-stationarity and strong baselines. Peter Cotton contribution: study one `precise` online covariance estimator against a static training covariance. Monitor quality and predictor quality are separate hypotheses.
 

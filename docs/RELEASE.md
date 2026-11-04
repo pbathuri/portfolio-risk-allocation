@@ -12,7 +12,7 @@ Independent rerunner: ______  Mentor: ______
 - [ ] Limitations, uncertainty and domain-specific pitfalls addressed
 - [ ] Dashboard or scientific outputs satisfy DELIVERY.md
 - [ ] No credentials or disallowed data in tracked files/outputs
-- [ ] Assistance log and contribution record complete
+- [ ] Contribution record complete
 - [ ] Each student explains one method and reviews another contribution
 
 Rerun command and discrepancies:

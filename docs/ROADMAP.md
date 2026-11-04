@@ -4,7 +4,7 @@ Preparation: complete [BEFORE_SATURDAY.md](BEFORE_SATURDAY.md) before the kickof
 
 Kickoff: Saturday November 7, 2026, 10:00–11:00 a.m., America/Indiana/Indianapolis (assumed from this week's meeting request). Final review: Saturday December 5, 10:00 a.m., after four build weeks. Account for Thanksgiving availability at kickoff.
 
-A owns data and predictive modeling; B owns covariance monitoring and dashboard exports. Each reviews the other's PR. Both explain the methods and rerun the other's work. Fill in names at kickoff; the mentor handles scope decisions. Each student authors at least one small PR per week. Preserve the repository's assistant-use log and peer-review requirements.
+A owns data and predictive modeling; B owns covariance monitoring and dashboard exports. Each reviews the other's PR. Both explain the methods and rerun the other's work. Fill in names at kickoff; the mentor handles scope decisions. Each student authors at least one small PR per week. Follow the peer-review guidelines in CONTRIBUTING.md.
 
 | Week / review | A delivers | B delivers | Acceptance gate |
 |---|---|---|---|

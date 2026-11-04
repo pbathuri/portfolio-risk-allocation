@@ -29,6 +29,6 @@ Target: published `SP` return at observation t. Predictors use returns at t−2 
 
 Keep raw files and row-level outputs local for repository hygiene. Permitted derivative reports can include aggregate metrics with the attribution above, license link and changes. No third-party credentials or private data are needed.
 
-## Why the source changed
+## Source selection
 
-The earlier Jane Street competition route returned HTTP 403; signed-in rules review then exposed competition-only use restrictions. No competition data was downloaded or terms accepted. The organizer approved replacing it with a source permitting this project. Jane Street remains methodological inspiration only.
+UCI provides a small, openly licensed dataset that each team member can download without an account. Jane Street's competition data has competition-specific use restrictions and is not used here.

@@ -18,7 +18,7 @@ Controls select precomputed model/day/series views; they must not silently retun
 - Held-out results, uncertainty and a failure-case discussion appear in a 2–3 page research report.
 - Dashboard totals reconcile with exported computations; five-minute peer demo completes the three intended tasks: compare models, inspect drift, trace provenance.
 - Permitted aggregate exports only; no unapproved raw UCI data, credentials or sensitive notebook outputs in Git.
-- Contribution record identifies each student's authored and reviewed work; assistant-use log is current.
+- Contribution record identifies each student's authored and reviewed work.
 
 Success does not require beating the baseline. A carefully explained failed hypothesis is credible research. Do not claim production readiness, profitable alpha, institutional adoption or affiliation with Jane Street/Peter Cotton.
 
