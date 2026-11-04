@@ -1,0 +1,21 @@
+docs/DATA.md
+  s_eb71deaaf9a1c3::t_14e6a8c9e428f5 5-18
+docs/VALIDATION.md
+  s_eb71deaaf9a1c3::t_14e6a8c9e428f5 16-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "90b8eae10c7a1734be9816e1a44da822e5097d8f",
+  "prompts": {},
+  "sessions": {
+    "s_eb71deaaf9a1c3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "unknown"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    }
+  }
+}
