@@ -1,19 +1,36 @@
-# Four weeks, two owners
+# Four-week plan
 
-Preparation: complete [BEFORE_SATURDAY.md](BEFORE_SATURDAY.md) before the kickoff; count its 2–3 hours per person toward Week 1.
+**Team:** two people, 6–8 hours each per week. Preparation for November 7 counts toward Week 1. Allow for Thanksgiving during Week 3.
 
-Kickoff: Saturday November 7, 2026, 10:00–11:00 a.m., America/Indiana/Indianapolis (assumed from this week's meeting request). Final review: Saturday December 5, 10:00 a.m., after four build weeks. Account for Thanksgiving availability at kickoff.
+A owns acquisition, feature experiments and the prediction report. B owns covariance comparisons, output checks and the dashboard. Each reviews the other's changes; both must reproduce the final run.
 
-A owns data and predictive modeling; B owns covariance monitoring and dashboard exports. Each reviews the other's PR. Both explain the methods and rerun the other's work. Fill in names at kickoff; the mentor handles scope decisions. Each student authors at least one small PR per week. Follow the peer-review guidelines in CONTRIBUTING.md.
-
-| Week / review | A delivers | B delivers | Acceptance gate |
+| Week | A | B | Evidence for the review |
 |---|---|---|---|
-| 1: Nov 7–13 / Nov 14 | Review prepared CSV; resolve schema/timing and run first feature ablation | Review starter splits/tests; review lag/window boundaries and monitor experiment | Confirmed real-data contract or fallback decision; reproduction and causal split evidence |
-| 2: Nov 14–20 / Nov 21 | Zero/mean/persistence/ridge comparisons on validation | `precise` smoke test and static-vs-online covariance comparison | Reproducible validation table; causal update test; portfolio-statistics hand exercise |
-| 3: Nov 21–27 / Nov 28 | Error breakdowns, small tuning log, frozen model | Three dashboard pages linked to real computed outputs | Peer walkthrough, frozen configuration, limitations draft; test remains unscored |
-| 4: Nov 28–Dec 4 / Dec 5 | One final test evaluation, paired uncertainty analysis | Clean-environment reproduction, dashboard and demonstration | Both reproduce; report and run manifest agree; no invented results |
+| Nov 7–13 | Reproduce the baseline; compare lag-only with lag-plus-rolling features | Check lag boundaries and repeat the comparison on expanding training windows within development data | One experiment table with all variants, dates and errors |
+| Nov 14–20 | Explain period-by-period errors; select the forecasting specification | Integrate one `precise` covariance estimator and compare it with static covariance | Versioned monitor run, score-before-update test and covariance comparison |
+| Nov 21–27 | Draft findings and limitations; freeze model choices | Build dashboard from saved outputs; reconcile its values with the report | Working views and a written freeze before final scoring |
+| Nov 28–Dec 4 | Evaluate the final period once; add paired block-bootstrap uncertainty | Reproduce from a clean environment and finish the demonstration | Reproducible report, dashboard and contribution record |
 
-Plan Week 3 as a lighter holiday week: no new model families or infrastructure. If work slips, reduce dashboard polish and retain the benchmark, monitor, leakage tests and report.
+Reviews: November 7, 14, 21 and 28 at 10 a.m.; final review December 5 at 10 a.m., America/Indiana/Indianapolis. Use the first meeting for a two-minute walkthrough from each person, questions about the data, and agreement on the first experiment.
 
+## Research choices
 
-See [learning goals](LEARNING_MAP.md), [kickoff](KICKOFF.md), and [task backlog](BACKLOG.csv).
+| Perspective | Consequence for this project |
+|---|---|
+| Statistical | Keep zero and persistence baselines. Report failed hypotheses. Use several earlier time windows to check stability; never recycle the reserved test set. |
+| Financial | The source calendar and market-close alignment are imperfect. Delay predictors, discuss uncertainty, and avoid converting forecast scores into P&L. |
+| Engineering | Keep the download small and the pipeline reproducible. Tests, hashes, consistent outputs and an independent rerun matter more here than cloud infrastructure. |
+| Usability | A reviewer should be able to compare models, inspect changing correlations and trace a number to its run. Build those three views before polishing the interface. |
+| Career preparation | Demonstrate the reasoning behind a model, not just that a library ran. Keep examples of code review, a failed experiment and a corrected data assumption. See SOURCES.md for the employer evidence behind these choices. |
+
+## Scope limits
+
+Use one feature ablation and one online covariance estimator. Keep a CPU workflow and the existing dependencies until a new requirement is justified. Deep networks, LLM explanations, live trading and deployment are outside the four-week scope. SQL is useful in broader analytics work, but this small single-table study does not justify adding a database solely for a résumé keyword.
+
+The dataset is adequate for learning and a modest research demonstration. A later extension should use a larger, independently licensed dataset and a new untouched period; four weeks of work on 536 rows cannot establish general market predictability.
+
+## Finished work
+
+Deliver a 2–3 page report, a five-minute demonstration and the code to reproduce both. The dashboard needs three views: baseline/error comparison, static/online covariance, and data/run provenance. Display dates, sample counts and whether a value is training, validation or final-test evidence.
+
+Before release, check that tests pass, another person can reproduce the outputs, every figure agrees with the saved computations, data attribution is present, and each contribution is recorded. A negative result is acceptable if the question and evidence are clear.

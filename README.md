@@ -1,16 +1,12 @@
-# DSC Fintech — Global Return Forecasting & Risk Monitor
+# Global Return Forecasting & Risk Monitor
 
-**Two people, four weeks:** study whether lagged international market returns predict the published S&P series, then evaluate Peter Cotton's online covariance tools for monitoring changing risk. Jane Street inspires chronological evaluation and attention to non-stationarity; **this project does not use Jane Street data**.
+A four-week DSC project for two people: test whether lagged international market returns help predict the published S&P return series, then compare static and adaptive covariance estimates.
 
-The source is [UCI's Istanbul Stock Exchange dataset](https://archive.ics.uci.edu/dataset/247/istanbul+stock+exchange), listed by UCI under CC BY 4.0. It is a small historical methods benchmark, not a current-market trading system.
+The first real-data run is complete. On validation, ridge regression scored **−0.079 zero-mean R²**, below the zero-return benchmark. The next step is to test whether the rolling features help and whether the result is stable across earlier time periods. [Results and reproduction details](docs/REAL_DATA_VERIFICATION.md).
 
-## Before Saturday
+## Get started
 
-Complete the [checklist](docs/BEFORE_SATURDAY.md) before **Saturday November 7, 10 a.m. America/Indiana/Indianapolis**. Budget 2–3 hours each. A verifies the data and provenance; B explains features and reproduces the baseline scores. No Kaggle account or API key is needed.
-
-## Run the verified path
-
-From the repository root using Python 3.11:
+Python 3.11, from the repository root:
 
 ```bash
 python3.11 -m venv .venv
@@ -23,24 +19,32 @@ python scripts/run_forecasting.py --input data/processed/checkpoint.csv
 python -m unittest discover -s tests
 ```
 
-Windows PowerShell activation: `.venv\Scripts\Activate.ps1`. For an offline mechanics exercise run `python scripts/run_forecasting.py --demo`. Real artifacts go to `outputs/real/`; synthetic artifacts go to `outputs/demo/`. Raw data and generated outputs stay out of Git.
+On Windows PowerShell, activate with `.venv\Scripts\Activate.ps1`. The download needs no account or API key. For an offline exercise, run `python scripts/run_forecasting.py --demo`.
 
-**Verified on actual data:** official download → schema/date checks → hashed preparation → lagged features → train/validation baseline scores. See [recorded results and limitations](docs/REAL_DATA_VERIFICATION.md). Ridge did not beat zero on validation. The final test is intentionally withheld.
+Results are written to `outputs/real/`; synthetic runs use `outputs/demo/`. Raw data, generated outputs and credentials stay out of Git.
 
-## Implemented versus planned
+## Data and scope
 
-Implemented: downloader, source validation, two-row-lagged returns, rolling features, training-only preprocessing, chronological 60/20/20 splits after warm-up, zero/mean/persistence/ridge baselines, 17 tests and four notebooks.
+The [UCI Istanbul Stock Exchange dataset](https://archive.ics.uci.edu/dataset/247/istanbul+stock+exchange) has 536 historical observations from 2009–2011 and is listed under CC BY 4.0. We use two-observation-lagged inputs, chronological splits and training-only preprocessing. The final 103 observations remain unscored.
 
-Still team work: feature ablations, `precise` monitor integration, uncertainty analysis, interactive dashboard and final test evaluation. No trade execution or P&L backtest is claimed.
+This is a small research study. It does not establish current-market performance or trading profitability. Jane Street's public research themes inform the evaluation approach; Peter Cotton's `precise` library is the planned covariance experiment. No Jane Street data is used.
 
-| Location | Purpose |
+## Work plan
+
+- **Implemented:** download, data checks, lag/rolling features, four baselines, tests and learning notebooks.
+- **Next:** one feature ablation, development-period stability checks, static versus online covariance, and a focused results dashboard.
+- **Final:** freeze the method, evaluate the reserved period once, and publish a short report with reproducible evidence.
+
+Start with the [Saturday checklist](docs/BEFORE_SATURDAY.md). The [four-week plan](docs/ROADMAP.md) covers ownership and deliverables.
+
+## Repository guide
+
+| Path | Contents |
 |---|---|
-| `src/forecasting.py` | Features, splits, baseline models and metrics |
-| `scripts/` | Download, inspect, prepare, run and notebook verification |
-| `notebooks/` | Four guided synthetic exercises; real runs use the explicit CLI |
-| `docs/` | Checklist, roadmap, methods, source attribution and recorded real results |
-| `legacy/portfolio/` | Original allocation exercises, isolated from this workflow |
+| `src/forecasting.py` | Features, time splits, baselines and metrics |
+| `scripts/` | Download, inspection, preparation, execution and notebook verification |
+| `tests/` | Numerical, data-contract and temporal-leakage checks |
+| `notebooks/` | Four short synthetic exercises |
+| `docs/` | Data, methods, plan and recorded results |
 
-[Data and license](docs/DATA.md) · [Features](docs/FEATURES.md) · [Methods](docs/METHODS.md) · [Roadmap](docs/ROADMAP.md) · [Team](docs/TEAM.md) · [DSC learning map](docs/LEARNING_MAP.md) · [Delivery](docs/DELIVERY.md).
-
-Repository name retained for continuity. Earlier plans in Git history and `docs/archive/five-week-plan/` are historical, not current instructions.
+[Data and attribution](docs/DATA.md) · [Methods](docs/METHODS.md) · [DSC learning goals](docs/LEARNING_MAP.md) · [Validation](docs/VALIDATION.md) · [Sources and career context](docs/SOURCES.md) · [Contributing](CONTRIBUTING.md).

@@ -10,7 +10,7 @@ The primary workflow uses the openly licensed UCI Istanbul Stock Exchange datase
 - 17 forecasting tests passed on Python 3.11 with no skips, covering metrics, source dates, download validation, lag/window causality, split boundaries, training isolation, withheld-test isolation, missing data and changed-input rejection.
 - Four revised notebooks executed in actual Jupyter kernels; synthetic outputs clearly labeled.
 - Python compilation, active Markdown links, backlog structure and diff-whitespace checks passed.
-- Original portfolio code is unchanged under `legacy/portfolio/`; its six regression tests remain in CI.
+- The active test suite covers this forecasting project. Previous portfolio exercises and their separate CI step have been removed.
 
 No new required dependency was added. No lint/type-check tooling is configured; compilation is not claimed as a type-checker run. Hosted CI verifies code and notebooks without requiring a live data endpoint.
 

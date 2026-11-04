@@ -14,6 +14,3 @@ jobs:
       - run: python -m unittest discover -s tests
       - run: python scripts/run_forecasting.py --demo
       - run: python scripts/execute_notebooks.py
-      - name: Retained portfolio exercise regression tests
-        working-directory: legacy/portfolio
-        run: python -m unittest discover -s tests

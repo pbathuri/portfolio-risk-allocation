@@ -4,7 +4,7 @@
 
 ## Both — setup (20–30 minutes)
 
-Pull the repo, follow README environment setup, run `python scripts/run_forecasting.py --demo` and `python -m unittest discover -s tests`. Read DATA.md and FEATURES.md. Use REAL_DATA_VERIFICATION.md to check your results.
+Pull the repo, follow README environment setup, run `python scripts/run_forecasting.py --demo` and `python -m unittest discover -s tests`. Read [DATA.md](DATA.md) and [METHODS.md](METHODS.md). Use REAL_DATA_VERIFICATION.md to check your results.
 
 ## A — data and provenance (60–90 minutes)
 
