@@ -1,0 +1,36 @@
+docs/ROADMAP.md
+  s_f5c5afe1e2effd::t_e5588f540d8641 1,3,5,7,9-30,32,34,36
+docs/SOURCES.md
+  s_f5c5afe1e2effd::t_e5588f540d8641 9-20
+docs/METHODS.md
+  s_f5c5afe1e2effd::t_b011891df951fc 3,13-33,35,38-56
+  s_f5c5afe1e2effd::t_e5588f540d8641 34,36-37
+docs/VALIDATION.md
+  s_f5c5afe1e2effd::t_b011891df951fc 13
+docs/LEARNING_MAP.md
+  s_f5c5afe1e2effd::t_e5588f540d8641 1,3,5,7-11,13
+CONTRIBUTING.md
+  s_f5c5afe1e2effd::t_b011891df951fc 11
+README.md
+  s_f5c5afe1e2effd::t_e5588f540d8641 1,3,5,7,9,22,24,26,28,30,32-36,38-48,50
+.gitignore
+  s_f5c5afe1e2effd::t_b011891df951fc 19-20
+docs/BEFORE_SATURDAY.md
+  s_f5c5afe1e2effd::t_b011891df951fc 7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "8eefc6871d1cc4dd19e3971c548b54762379b9ee",
+  "prompts": {},
+  "sessions": {
+    "s_f5c5afe1e2effd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    }
+  }
+}
