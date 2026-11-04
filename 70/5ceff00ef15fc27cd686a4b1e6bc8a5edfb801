@@ -1,0 +1,29 @@
+README.md
+  s_f5c5afe1e2effd::t_c732fc00499268 3-4
+docs/BEFORE_SATURDAY.md
+  s_f5c5afe1e2effd::t_7c5e0a22c4a8a2 3-4
+docs/DATA.md
+  s_f5c5afe1e2effd::t_8837155a992604 3-4,11,13,19
+docs/PROJECT_PROPOSAL.md
+  s_f5c5afe1e2effd::t_7de2d1a81a7555 3-4
+docs/TEAMS_MESSAGE.md
+  s_f5c5afe1e2effd::t_585336f760d679 1-2
+docs/VALIDATION.md
+  s_f5c5afe1e2effd::t_1fbbd3b0f4af4a 27-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "705ceff00ef15fc27cd686a4b1e6bc8a5edfb801",
+  "prompts": {},
+  "sessions": {
+    "s_f5c5afe1e2effd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    }
+  }
+}
