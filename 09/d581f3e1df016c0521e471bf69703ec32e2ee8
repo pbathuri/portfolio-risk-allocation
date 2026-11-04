@@ -1,0 +1,69 @@
+README.md
+  s_eb71deaaf9a1c3::t_128d8258f1a5cb 1,3,5-19,31,38,48
+docs/AI_LOG.csv
+  s_f5c5afe1e2effd::t_3a84fc2a6e4af6 2
+docs/BACKLOG.csv
+  s_f5c5afe1e2effd::t_bdb77065db5eab 1-9
+docs/DATA.md
+  s_eb71deaaf9a1c3::t_e65b1c833f820a 1-2
+docs/DELIVERY.md
+  s_eb71deaaf9a1c3::t_cd67a162c29a8f 1,3,5-7,9,11,13-27
+docs/EXPERIMENT.md
+  s_eb71deaaf9a1c3::t_d0b76db4718611 1-36
+docs/KICKOFF.md
+  s_eb71deaaf9a1c3::t_e9ea1794347dd1 1,3,6-10,12
+docs/LEARNING_MAP.md
+  s_f5c5afe1e2effd::t_c5637fb8c6f55d 1,4,6-14
+docs/METHODS.md
+  s_eb71deaaf9a1c3::t_94b8bdafe2001f 1-2
+docs/PROJECT_PROPOSAL.md
+  s_eb71deaaf9a1c3::t_471e2f136af36a 1-39
+docs/RELEASE.md
+  s_eb71deaaf9a1c3::t_0d26178e0aef29 7,9
+docs/REVIEW.md
+  s_eb71deaaf9a1c3::t_eeb165b70d35d4 11,13
+docs/ROADMAP.md
+  s_eb71deaaf9a1c3::t_ef1a1482a276a0 1,3,5,7-12,14,17
+docs/SOURCES.md
+  s_eb71deaaf9a1c3::t_209bce3d79e044 1-2
+docs/TEAM.md
+  s_eb71deaaf9a1c3::t_45aa0411c36026 1,3-6,8,10,12,14
+docs/VALIDATION.md
+  s_eb71deaaf9a1c3::t_ad0df8ba091856 1-15
+docs/archive/five-week-plan/BACKLOG.csv
+  s_eb71deaaf9a1c3::t_b49c348cc950fc 1-26
+docs/archive/five-week-plan/DELIVERY.md
+  s_eb71deaaf9a1c3::t_4dad5cccbffd24 1-14
+docs/archive/five-week-plan/KICKOFF.md
+  s_eb71deaaf9a1c3::t_a63afe756380f2 1-19
+docs/archive/five-week-plan/LEARNING_MAP.md
+  s_eb71deaaf9a1c3::t_f36cd243c0c18c 1-13
+docs/archive/five-week-plan/ROADMAP.md
+  s_eb71deaaf9a1c3::t_776556c027f0b3 1-67
+docs/archive/five-week-plan/TEAM.md
+  s_eb71deaaf9a1c3::t_5204e2700ef7f6 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "09d581f3e1df016c0521e471bf69703ec32e2ee8",
+  "prompts": {},
+  "sessions": {
+    "s_eb71deaaf9a1c3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "unknown"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    },
+    "s_f5c5afe1e2effd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    }
+  }
+}
