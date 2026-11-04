@@ -13,6 +13,10 @@ Meaningful coverage includes hand-calculated weighted metrics, undefined denomin
 
 No lint/type-check tooling is configured in the repository; compile checks are not presented as a type-checker run. No new required dependencies were added. Versions of numerical packages and Python are written into each run manifest; record a full environment lock for research releases.
 
+## Real-source attempt
+
+November 3, 2026: repaired a broken machine-local Kaggle CLI in a temporary environment (no required dependency change). Official competition file listing succeeded. Downloading only `train.parquet/partition_id=0/part-0.parquet` returned HTTP 403. Removing the environment token to test the alternate credential configuration instead returned authentication required. No training data was downloaded; no real-data score or end-to-end pass is claimed. Account rules acceptance or credentials must be resolved before continuing.
+
 ## Not validated or completed
 
 Real Kaggle access/downloads, exact competition field availability and label-release timing, a purged split, the competition online inference API, real-data accuracy, `precise` integration, uncertainty analysis, final test evaluation, interactive dashboard and cluster execution remain team work. No market-performance or profitable-trading claim is made. The default workflow intentionally withholds test evaluation.

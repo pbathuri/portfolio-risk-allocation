@@ -2,6 +2,20 @@
 
 Primary source: [Jane Street Real-Time Market Data Forecasting data](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/data). Read the [rules](https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/rules) with your own account. Public access does not establish unrestricted redistribution. No real competition data is bundled or downloaded by the demo.
 
+## Verified access preflight
+
+On November 3, 2026, the official file-listing command succeeded using Kaggle CLI 2.2.5. The smallest listed training partition was `train.parquet/partition_id=0/part-0.parquet` (470,341,709 bytes, about 470 MB). Listing files does **not** prove download access: the subsequent download returned HTTP 403 for the current account. Real-data execution is pending access resolution.
+
+Before allocating download time, review/accept the competition rules in the same account used by the CLI. If already accepted, check that the CLI credentials belong to that account. Do not share tokens. A missing-dependency error before any HTTP request indicates a broken local CLI environment, not a competition permission failure; use a clean CLI environment or the web download route.
+
+Once access is enabled, the verified command target is:
+
+```bash
+kaggle competitions download jane-street-real-time-market-data-forecasting -f 'train.parquet/partition_id=0/part-0.parquet' -p data/raw
+```
+
+Inspect the actual downloaded path before passing it to `inspect_source.py`; no real source schema or date IDs have yet been verified by this repository's maintainer.
+
 ## Pull a bounded input
 
 Use Kaggle's web file listing to inspect size and download **one training file**, not the whole competition. If you already use the authenticated official CLI:
