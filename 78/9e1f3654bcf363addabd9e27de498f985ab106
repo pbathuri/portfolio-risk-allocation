@@ -1,0 +1,83 @@
+docs/BACKLOG.csv
+  s_f5c5afe1e2effd::t_d439acbc17789f 5
+  s_eb71deaaf9a1c3::t_953213388dc15b 2,4
+notebooks/01_data_qa.ipynb
+  s_eb71deaaf9a1c3::t_953213388dc15b 8-9,34-35,45
+scripts/fetch_data.py
+  s_f5c5afe1e2effd::t_ecb548671d0229 1-28
+docs/EXPERIMENT.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 3,5,7,9,11,13,15,17,19,21,23,25
+scripts/inspect_source.py
+  s_f5c5afe1e2effd::t_ecb548671d0229 1,4,6-7,9-16
+docs/PROJECT_PROPOSAL.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3,5,7,9,11,13,15
+docs/SOURCES.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3-6,8
+scripts/prepare_forecasting.py
+  s_f5c5afe1e2effd::t_ecb548671d0229 1,7-8,11-13,15-23,27-32
+notebooks/03_baselines.ipynb
+  s_eb71deaaf9a1c3::t_953213388dc15b 8-9,32,44
+docs/REAL_DATA_VERIFICATION.md
+  s_eb71deaaf9a1c3::t_82f73053bf105e 1-53
+docs/FEATURES.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3,5,7-10,12,14,16
+notebooks/02_features.ipynb
+  s_eb71deaaf9a1c3::t_953213388dc15b 8-9,33-34,44
+docs/METHODS.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3,5,7,9,11,13
+docs/DELIVERY.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 7,11,20,27,29
+src/forecasting.py
+  s_f5c5afe1e2effd::t_ecb548671d0229 1,9,15-19,31,34-46,50,52-57,61-71,78,80-83,88-90,96-99,101,105-106,108-109,113,115,118-123,125-139
+docs/CHECKPOINT_TEMPLATE.md
+  s_f5c5afe1e2effd::t_d439acbc17789f 10-12
+  s_eb71deaaf9a1c3::t_82f73053bf105e 20
+  s_eb71deaaf9a1c3::t_953213388dc15b 4,19,27,30
+docs/TEAMS_MESSAGE.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3-5,7,9
+docs/DATA.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3,5,7,9,11,14-16,20,22,24,26,28,30,32,34
+docs/ROADMAP.md
+  s_f5c5afe1e2effd::t_d439acbc17789f 11,13
+  s_eb71deaaf9a1c3::t_953213388dc15b 12
+notebooks/00_setup.ipynb
+  s_eb71deaaf9a1c3::t_953213388dc15b 8-9,32,44
+tests/test_forecasting.py
+  s_eb71deaaf9a1c3::t_73a349bd0ea23d 3,5,8-9,12-14,16,20-67,69-77,79-81,83-84,86-87,89,91-93,95,97-101,103-126
+docs/LEARNING_MAP.md
+  s_eb71deaaf9a1c3::t_82f73053bf105e 11
+README.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3,5,7,9,11,13,19-21,23,26,28,30,32,34,38-44,46
+docs/KICKOFF.md
+  s_f5c5afe1e2effd::t_d439acbc17789f 7,9
+docs/VALIDATION.md
+  s_f5c5afe1e2effd::t_d439acbc17789f 1,3,5,7-13,15,17,19,21
+docs/AI_LOG.csv
+  s_eb71deaaf9a1c3::t_82f73053bf105e 4
+docs/BEFORE_SATURDAY.md
+  s_eb71deaaf9a1c3::t_953213388dc15b 1,3,5,7,9,11-15,17,19,21,23-25,27,29,31,33,35,37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "789e1f3654bcf363addabd9e27de498f985ab106",
+  "prompts": {},
+  "sessions": {
+    "s_eb71deaaf9a1c3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "unknown"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    },
+    "s_f5c5afe1e2effd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    }
+  }
+}
