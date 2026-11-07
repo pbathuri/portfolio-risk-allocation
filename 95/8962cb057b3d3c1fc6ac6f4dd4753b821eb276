@@ -1,0 +1,23 @@
+README.md
+  s_eb71deaaf9a1c3::t_df2d6d421e4910 38
+docs/BEFORE_NOVEMBER_14.md
+  s_eb71deaaf9a1c3::t_61a606134aea26 1-72
+docs/ROADMAP.md
+  s_eb71deaaf9a1c3::t_565ce8d536cd49 3-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "958962cb057b3d3c1fc6ac6f4dd4753b821eb276",
+  "prompts": {},
+  "sessions": {
+    "s_eb71deaaf9a1c3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "unknown"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    }
+  }
+}
