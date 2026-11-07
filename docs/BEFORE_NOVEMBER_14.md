@@ -11,6 +11,16 @@ This week we will test one question: **do the rolling SP statistics improve ridg
 - Agree who owns A and B. Use separate branches and avoid editing the same notebook simultaneously.
 - Record the hypothesis and the fixed date windows below in your PR before inspecting new scores.
 
+## Reading for this week (20–30 minutes)
+
+Read scikit-learn's [lagged features for time-series forecasting walkthrough](https://scikit-learn.org/stable/auto_examples/applications/plot_time_series_lagged_features.html).
+
+- **Person A:** Focus on the feature-generation section. Notice that values are shifted before rolling statistics are calculated and that early rows lack enough history. Relate this to our two-observation delay and shared 21-row warm-up. Hand-check which source rows contribute to one rolling feature before changing the feature-selection code.
+- **Person B:** Focus on the random-split comparison and time-based evaluation sections. Explain why shuffled splits can produce optimistic scores and why results vary across time windows. Apply the principle to our fixed windows below; refit preprocessing and the model separately for each training window.
+- **Both:** Bring one takeaway and one question. Explain how the example connects to your own code, rather than copying it line for line.
+
+The example uses bike demand, Polars and gradient boosting. We keep pandas, ridge with alpha=1, our existing features and the specified dates. Do not copy its hourly lags, split sizes or `gap=48`: our rows are irregular trading observations, and a split gap is different from a predictor lag. Keep RMSE and zero-mean R²; percentage error is unsuitable when returns can be zero. The quantile-regression section is optional and outside this week's task.
+
 ## Person A — compare the two feature sets
 
 1. Read `engineer()` and `checkpoint()` in `src/forecasting.py`.
