@@ -1,5 +1,7 @@
 # Four-week plan
 
+Current assignment: [complete before November 14](BEFORE_NOVEMBER_14.md).
+
 **Team:** two people, 6–8 hours each per week. Preparation for November 7 counts toward Week 1. Allow for Thanksgiving during Week 3.
 
 A owns acquisition, feature experiments and the prediction report. B owns covariance comparisons, output checks and the dashboard. Each reviews the other's changes; both must reproduce the final run.

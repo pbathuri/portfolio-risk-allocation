@@ -35,7 +35,7 @@ This is a small research study. It does not establish current-market performance
 - **Next:** one feature ablation, development-period stability checks, static versus online covariance, and a focused results dashboard.
 - **Final:** freeze the method, evaluate the reserved period once, and publish a short report with reproducible evidence.
 
-Start with the [Saturday checklist](docs/BEFORE_SATURDAY.md). The [four-week plan](docs/ROADMAP.md) covers ownership and deliverables.
+**Next deadline:** [work due November 14](docs/BEFORE_NOVEMBER_14.md). If you still need setup, use the [first checklist](docs/BEFORE_SATURDAY.md). The [four-week plan](docs/ROADMAP.md) covers ownership and deliverables.
 
 ## Repository guide
 
