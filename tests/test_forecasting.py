@@ -14,9 +14,48 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from forecasting import validate,engineer,synthetic,split_dates,checkpoint,weighted_metrics
 from prepare_forecasting import prepare
 from fetch_data import fetch
-
+from forecasting import (
+    RETURNS, validate, engineer, select_features, synthetic,
+    split_dates, checkpoint, weighted_metrics
+)
 
 class ForecastingTests(unittest.TestCase):
+    def test_lag_only_selects_expected_columns(self):
+        features = engineer(synthetic())
+        lag_columns = [f'{name}_lag2' for name in RETURNS]
+        expected = lag_columns + [f'{name}_missing' for name in lag_columns]
+
+        selected = select_features(features, 'lag_only')
+
+        self.assertEqual(selected.columns.tolist(), expected)
+        self.assertEqual(selected.shape[1], 18)
+
+
+    def test_lags_plus_rolling_selects_all_existing_columns(self):
+        features = engineer(synthetic())
+
+        selected = select_features(features, 'lags_plus_rolling')
+
+        pd.testing.assert_frame_equal(selected, features)
+        self.assertEqual(selected.shape[1], 26)
+
+
+    def test_checkpoint_defaults_to_full_feature_set(self):
+        data = synthetic()
+
+        with tempfile.TemporaryDirectory() as tmp:
+            default_dir = Path(tmp) / 'default'
+            explicit_dir = Path(tmp) / 'explicit'
+
+            default_metrics, default_manifest = checkpoint(data, default_dir, 'demo')
+            full_metrics, full_manifest = checkpoint(
+                data, explicit_dir, 'demo', feature_set='lags_plus_rolling'
+            )
+
+        pd.testing.assert_frame_equal(default_metrics, full_metrics)
+        self.assertEqual(default_manifest['features'], full_manifest['features'])
+        self.assertEqual(default_manifest['feature_set'], 'lags_plus_rolling')
+
     def test_metric_hand_calculation(self):
         m=weighted_metrics([1,2],[0,1],[1,3])
         self.assertAlmostEqual(m['weighted_rmse'],1)
