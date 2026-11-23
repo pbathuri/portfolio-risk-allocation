@@ -1,6 +1,8 @@
 # Four-week plan
 
-Current assignment: [complete before November 21](BEFORE_NOVEMBER_21.md).
+Current assignment: [complete before November 28](BEFORE_NOVEMBER_28.md).
+
+The November 28 checklist takes priority over the original schedule below: finish pending forecast and covariance checks before dashboard work or final-test scoring. The December 5 review remains conditional on that evidence.
 
 **Team:** two people, 6–8 hours each per week. Preparation for November 7 counts toward Week 1. Allow for Thanksgiving during Week 3.
 
