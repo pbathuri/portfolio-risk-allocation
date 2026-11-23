@@ -46,4 +46,13 @@ Before pairing the outputs, exchange the source hash, series order, weights, ini
 
 By **Wednesday, November 25**, share branch links and any blockers so the other person can keep working. If time is tight, finish the PR review and earlier-window tables first, then get the static and online outputs aligned. A documented incomplete online run is better than an invented comparison. Defer chart polish and dashboard work.
 
-On Saturday, bring a two-minute explanation each and the result links. We will decide whether the evidence is ready to freeze. **Do not score September 23, 2010–February 22, 2011 yet.** Dashboard work and the December 5 final review depend on completing these checks; if necessary, revise the release date instead of skipping evaluation safeguards.
+On Saturday, bring a two-minute explanation each and the result links. We will decide whether the evidence is ready to freeze. **Do not score September 23, 2010–February 22, 2011 yet.** The revised final review is December 12. December 5 is the dashboard/report and method-freeze checkpoint; see the [completion plan](ROADMAP.md).
+
+## Required result package for November 28
+
+- **Forecast table:** 15 rows: five model/feature configurations for each of Original, Earlier 1 and Earlier 2. The five are zero, training mean, persistence, lag-only ridge and ridge with rolling features. Include RMSE, zero-mean R², dates and counts; keep alpha=1 throughout.
+- **Covariance table:** two rows, static and online, with MAE against the squared basket-return proxy on the same 103 validation dates. Report rate/version and initialization details.
+- **Daily covariance output:** 103 unique dates with both estimates and the observed proxy. Andrew and Manish jointly check the one-to-one date join and identical units.
+- **Tests and review:** demonstrate the two-series hand calculation, symmetry/finite values, nonnegative basket variance within tolerance, no look-ahead, and exactly-once online updates. Include passing test output and a peer reproduction command in each PR.
+
+A result that exists only locally is not handed off. Push the implementation branches and commit the attributed summary to `docs/results/week2.md`; daily outputs stay under `outputs/week2/`. Any unfinished item must have an owner, blocker and revised delivery date. The target is the complete package, not just a progress message.

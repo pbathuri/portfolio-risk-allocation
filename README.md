@@ -1,6 +1,6 @@
 # Global Return Forecasting & Risk Monitor
 
-A four-week DSC project for two people: test whether lagged international market returns help predict the published S&P return series, then compare static and adaptive covariance estimates.
+A DSC project for two people, with final review on **December 12, 2026**: test whether lagged international market returns help predict the published S&P return series, then compare static and adaptive covariance estimates.
 
 The first real-data run is complete. On validation, ridge regression scored **−0.079 zero-mean R²**, below the zero-return benchmark. The next step is to test whether the rolling features help and whether the result is stable across earlier time periods. [Results and reproduction details](docs/REAL_DATA_VERIFICATION.md).
 
@@ -35,7 +35,7 @@ This is a small research study. It does not establish current-market performance
 - **Next:** one feature ablation, development-period stability checks, static versus online covariance, and a focused results dashboard.
 - **Final:** freeze the method, evaluate the reserved period once, and publish a short report with reproducible evidence.
 
-**Next deadline:** [work due November 28](docs/BEFORE_NOVEMBER_28.md). If you still need setup, use the [first checklist](docs/BEFORE_SATURDAY.md). The [four-week plan](docs/ROADMAP.md) covers ownership and deliverables.
+**Next deadline:** [work due November 28](docs/BEFORE_NOVEMBER_28.md). If you still need setup, use the [first checklist](docs/BEFORE_SATURDAY.md). The [completion plan](docs/ROADMAP.md) sets the November 28, December 5 and December 12 deliverables.
 
 ## Repository guide
 
