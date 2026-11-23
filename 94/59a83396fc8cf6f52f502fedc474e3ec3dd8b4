@@ -1,0 +1,23 @@
+README.md
+  s_f5c5afe1e2effd::t_0ec011ff5b2f7e 38
+docs/BEFORE_NOVEMBER_28.md
+  s_f5c5afe1e2effd::t_498eb394ef9536 1-49
+docs/ROADMAP.md
+  s_f5c5afe1e2effd::t_cede29db8c8dde 3-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9459a83396fc8cf6f52f502fedc474e3ec3dd8b4",
+  "prompts": {},
+  "sessions": {
+    "s_f5c5afe1e2effd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1a3d8-a044-7180-a612-90dd391e590f",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "pbathuri <taaffeite.aart@gmail.com>"
+    }
+  }
+}
