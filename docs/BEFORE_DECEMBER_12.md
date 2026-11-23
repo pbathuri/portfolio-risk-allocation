@@ -2,6 +2,14 @@
 
 **Due: December 12, 2026, 10 a.m. Eastern.** Run this checklist only after the [December 5 freeze](BEFORE_DECEMBER_5.md) is approved. If that gate is incomplete, record the blocker and agree a revised scope/date before scoring final data.
 
+## Explain as well as reproduce
+
+Revisit [lesson 6](LEARNING_GUIDE.md#6-freeze-evaluate-and-explain-uncertainty) before the approved final run.
+
+- **Andrew:** explain the loss difference's sign and the bootstrap interval using a toy example before interpreting the actual result.
+- **Manish:** walk through the run manifest, then independently reproduce a displayed value. Explain what would count as a reproducibility failure.
+- **Both:** rehearse explaining a negative finding, a timing assumption and a test that guards against leakage. Use your own words; the goal is to defend the work, not recite the checklist.
+
 ## By Tuesday, December 8 — final results
 
 - [ ] **Andrew:** Run the frozen final-evaluation command. Save source/config hashes, code commit, environment, sample counts and forecast/risk metrics under a distinct final-output directory. Keep every baseline and the selected model in the report, regardless of rank.

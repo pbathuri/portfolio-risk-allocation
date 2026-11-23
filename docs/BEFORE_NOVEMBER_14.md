@@ -21,6 +21,8 @@ Read scikit-learn's [lagged features for time-series forecasting walkthrough](ht
 
 The example uses bike demand, Polars and gradient boosting. We keep pandas, ridge with alpha=1, our existing features and the specified dates. Do not copy its hourly lags, split sizes or `gap=48`: our rows are irregular trading observations, and a split gap is different from a predictor lag. Keep RMSE and zero-mean R²; percentage error is unsuitable when returns can be zero. The quantile-regression section is optional and outside this week's task.
 
+For worked exercises that connect this reading to the code, use [lessons 1–2 in the learning guide](LEARNING_GUIDE.md#1-follow-one-row-through-the-pipeline). Hand-check one feature and one score before implementing the comparison.
+
 ## Person A — compare the two feature sets
 
 1. Read `engineer()` and `checkpoint()` in `src/forecasting.py`.

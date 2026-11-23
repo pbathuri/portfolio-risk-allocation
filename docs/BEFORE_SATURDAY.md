@@ -2,6 +2,8 @@
 
 **Due:** Saturday November 7, 2026, 10 a.m. America/Indiana/Indianapolis. **Budget:** 2–3 hours each, counted toward Week 1. Claim A/B in Teams. The source is UCI's openly licensed international-return dataset; no Kaggle login is needed.
 
+Start with [lesson 1](LEARNING_GUIDE.md#1-follow-one-row-through-the-pipeline) to understand how a source row becomes a model input.
+
 ## Both — setup (20–30 minutes)
 
 Pull the repo, follow README environment setup, run `python scripts/run_forecasting.py --demo` and `python -m unittest discover -s tests`. Read [DATA.md](DATA.md) and [METHODS.md](METHODS.md). Use REAL_DATA_VERIFICATION.md to check your results.

@@ -2,6 +2,14 @@
 
 **Due: December 5, 2026, 10 a.m. Eastern.** Complete the [November 28 result package](BEFORE_NOVEMBER_28.md) first. This checkpoint prepares the project for final scoring; it does not authorize scoring early.
 
+## Learn before building the presentation
+
+Work through [lesson 5](LEARNING_GUIDE.md#5-make-a-chart-someone-else-can-check) and [lesson 6](LEARNING_GUIDE.md#6-freeze-evaluate-and-explain-uncertainty).
+
+- **Andrew:** practice writing one claim with its evidence and limitation. Work the toy paired-loss/bootstrap exercise before implementing the final evaluator. Test it on development or synthetic data only.
+- **Manish:** trace three dashboard values back to the saved tables. Explain how a display filter differs from choosing a model, then review the evaluator's date boundaries and pairing.
+- **Both:** explain what changes after the freeze: configuration choices stop, while identical reproduction and documented bug fixes remain possible. Do not open final scoring as a practice exercise.
+
 ## Andrew — report and evaluation specification
 
 - [ ] Resolve PR feedback and consolidate the three-window forecast comparison. Recommend one feature set using all development evidence; retain zero, training mean and persistence as benchmarks. Keep alpha=1 unless a separately documented development-only decision is approved before the freeze.

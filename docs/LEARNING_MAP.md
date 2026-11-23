@@ -1,5 +1,7 @@
 # DSC learning goals
 
+Follow the [learning guide](LEARNING_GUIDE.md) for worked examples and verification exercises. Lessons 1–2 cover data and evaluation, lessons 3–4 cover portfolio statistics and covariance, and lessons 5–6 cover communication and final evaluation.
+
 The original DSC goals are retained as exercises within this project; a separate allocation application is no longer required.
 
 | Goal | Evidence |

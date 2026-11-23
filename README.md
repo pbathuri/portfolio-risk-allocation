@@ -4,6 +4,10 @@ A DSC project for two people, with final review on **December 12, 2026**: test w
 
 The first real-data run is complete. On validation, ridge regression scored **−0.079 zero-mean R²**, below the zero-return benchmark. The next step is to test whether the rolling features help and whether the result is stable across earlier time periods. [Results and reproduction details](docs/REAL_DATA_VERIFICATION.md).
 
+## Learn as you build
+
+Follow the [learning guide](docs/LEARNING_GUIDE.md): trace the data, compare features, calculate basket variance, update covariance, present results, then freeze and evaluate. Each lesson includes a toy exercise, a coding task and a check you can explain to your partner. The weekly checklists still set the required outputs and deadlines.
+
 ## Get started
 
 Python 3.11, from the repository root:

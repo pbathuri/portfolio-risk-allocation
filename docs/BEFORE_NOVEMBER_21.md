@@ -4,6 +4,8 @@
 
 Andrew's [November 14 submission](https://github.com/pbathuri/portfolio-risk-allocation/blob/477ac2a16b7e60ff5174c0e09d4ce2b47bb44ea8/docs/checkpoints/BEFORE_NOVEMBER_15_CHECKPOINT.md) reports original-window RMSE of 0.015498 for lag-only ridge, 0.015595 with rolling features and 0.015011 for zero. The rolling features did not help on that window. On November 14 the work was on `week-2-work` with no PR; the two earlier-window results were not in the shared repo.
 
+Work through [lessons 3–4](LEARNING_GUIDE.md#3-turn-covariance-into-basket-risk) before implementing the two covariance estimates. Use the toy calculation and update timeline to check your understanding.
+
 ## Andrew — close the forecast comparison and build the static benchmark
 
 - [ ] Open a PR from `week-2-work` into `main`; ask Manish to reproduce the original-window table. Fill in the actual Python version and commit in the submission note.

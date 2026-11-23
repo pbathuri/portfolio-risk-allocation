@@ -6,6 +6,16 @@
 
 As of November 23, Andrew's [PR #1](https://github.com/pbathuri/portfolio-risk-allocation/pull/1) is open and its automated checks pass. The original-window comparison is documented: adding rolling features slightly worsened ridge RMSE, and neither ridge version beat zero. The PR description is still blank and no peer review is recorded. Earlier-window results and covariance outputs are not yet present on the shared branches; if completed locally, push and link them instead of repeating the work.
 
+## Work through the method
+
+Start with [lessons 2–4](LEARNING_GUIDE.md#2-compare-models-fairly). The learning time is part of the weekly workload, not another assignment.
+
+| Person | Learn and practice | Apply it to this week's output | Show your understanding |
+|---|---|---|---|
+| Andrew | Hand-calculate the metric and two-series basket variance | Complete the forecast summary and fixed covariance estimates | Explain why the covariance term matters and why all methods need identical scoring dates |
+| Manish | Trace expanding training windows and the online update timeline | Finish earlier-window results and the precise estimate | Demonstrate that changing t−1 or t cannot affect the estimate saved for t |
+| Both | Inspect one joined output row | Produce the comparison table and chart | Reproduce one value and explain why squared basket return is only a proxy |
+
 ## Andrew — finish the PR and supply the static benchmark
 
 - [ ] Fill in PR #1 with the question, commands, findings and test results. Replace the environment/commit placeholders in the checkpoint note with verified values. Ask Manish to reproduce it and address any review comments. Passing CI alone is not a methods review; leave merging to the maintainer after review.
