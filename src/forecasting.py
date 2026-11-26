@@ -13,6 +13,12 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 RETURNS = ['ISE', 'ISE.1', 'SP', 'DAX', 'FTSE', 'NIKKEI', 'BOVESPA', 'EU', 'EM']
+LAG_FEATURES = [f'{name}_lag2' for name in RETURNS]
+ROLLING_FEATURES = [
+    'SP_mean5_lag2', 'SP_std5_lag2',
+    'SP_mean20_lag2', 'SP_std20_lag2',
+]
+FEATURE_SETS = ('lag_only', 'lags_plus_rolling')
 TARGET = 'SP'
 SOURCE_URL = 'https://archive.ics.uci.edu/static/public/247/data.csv'
 SOURCE_PAGE = 'https://archive.ics.uci.edu/dataset/247/istanbul+stock+exchange'
@@ -57,6 +63,16 @@ def engineer(frame):
         x[col + '_missing'] = x[col].isna().astype(float)
     return x
 
+def select_features(x, feature_set='lags_plus_rolling'):
+    if feature_set == 'lag_only':
+        value_columns = LAG_FEATURES
+    elif feature_set == 'lags_plus_rolling':
+        value_columns = LAG_FEATURES + ROLLING_FEATURES
+    else:
+        raise ValueError(f'Unknown feature set: {feature_set}')
+
+    columns = value_columns + [f'{column}_missing' for column in value_columns]
+    return x.loc[:, columns].copy()
 
 def split_dates(frame):
     """Remove fixed 21-row warm-up, then split dates 60/20/20; no overlap."""
@@ -89,8 +105,7 @@ def synthetic():
     frame.insert(0, 'date', pd.bdate_range('2020-01-01', periods=len(frame)).strftime('%Y-%m-%d'))
     return frame
 
-
-def checkpoint(frame, output, mode, source=None):
+def checkpoint(frame, output, mode, source=None, feature_set='lags_plus_rolling'):
     if mode not in {'demo', 'real'}:
         raise ValueError('Mode must be demo or real')
     out = Path(output)
@@ -98,7 +113,8 @@ def checkpoint(frame, output, mode, source=None):
     if manifest_path.exists() and json.loads(manifest_path.read_text())['mode'] != mode:
         raise ValueError('Do not mix demo and real outputs')
     frame = validate(frame)
-    masks, x = split_dates(frame), engineer(frame)
+    masks = split_dates(frame)
+    x = select_features(engineer(frame), feature_set)
     train = masks['train']
     kept = x.columns[x.loc[train].notna().any()].tolist()
     x = x[kept]
@@ -125,7 +141,7 @@ def checkpoint(frame, output, mode, source=None):
         'numpy': np.__version__, 'pandas': pd.__version__, 'sklearn': sklearn.__version__,
         'splits': splits, 'features': kept, 'ridge_alpha': 1., 'warmup_rows': 21,
         'target': 'SP return on observation date', 'weight': 'equal weight; ones',
-        'test_status': 'withheld; not scored', 'lag_contract': 'all predictors end at row t-2; rows are not uniform calendar intervals'}
+        'test_status': 'withheld; not scored', 'lag_contract': 'all predictors end at row t-2; rows are not uniform calendar intervals', 'feature_set': feature_set,}
     out.mkdir(parents=True,exist_ok=True)
     manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
     pd.DataFrame(results).to_csv(out/'metrics.csv',index=False)

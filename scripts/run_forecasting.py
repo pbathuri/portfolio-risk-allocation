@@ -14,6 +14,11 @@ def main():
     source.add_argument('--demo', action='store_true')
     source.add_argument('--input', type=Path, help='Prepared checkpoint CSV')
     parser.add_argument('--output', type=Path)
+    parser.add_argument(
+    '--feature-set',
+    choices=['lag_only', 'lags_plus_rolling'],
+    default='lags_plus_rolling',
+    )
     args = parser.parse_args()
     mode = 'demo' if args.demo else 'real'
     frame = synthetic() if args.demo else pd.read_csv(args.input, nrows=500001)
@@ -29,7 +34,9 @@ def main():
                 parser.error('Prepared input changed since its manifest; regenerate the slice')
             provenance['preparation'] = metadata
     output = args.output or Path('outputs') / mode
-    metrics, manifest = checkpoint(frame, output, mode, provenance)
+    metrics, manifest = checkpoint(
+    frame, output, mode, provenance, feature_set=args.feature_set
+    )
     print(metrics.to_string(index=False))
     print(f'Artifacts: {output}; final test: {manifest["test_status"]}')
 
